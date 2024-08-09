@@ -61,7 +61,7 @@ const CEP_Validator: React.FC = () => {
     const cleanedCEP = cepInput.replace(/\D/g, ''); // Remove non-numeric characters
 
     if (cleanedCEP.length !== 8) {
-      showTemporaryMessage('Insira um CEP válido.');
+      showTemporaryMessage('Insira um CEP.');
       return;
     }
 
