@@ -6,25 +6,30 @@ const generateCPF = (formatted: boolean) => {
   let cpf = Array.from({ length: 9 }, random).join('');
   cpf += calculateCPFCheckDigits(cpf);
   return formatted
-    ? cpf.replace(/(.{3})(.{3})(.{3})(.{2})/, '$1.$2.$3-$4')
+    ? cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
     : cpf;
 };
 
 const calculateCPFCheckDigits = (base: string) => {
   let sum = 0;
   let weight = 10;
+
+  // Calculate the first digit
   for (let i = 0; i < base.length; i++) {
     sum += parseInt(base[i]) * weight--;
   }
-  const remainder = (sum % 11);
-  const firstDigit = remainder < 2 ? 0 : 11 - remainder;
+  const firstDigit = (sum % 11) < 2 ? 0 : 11 - (sum % 11);
 
+  // Reset for the second digit calculation
   sum = 0;
   weight = 11;
+  base += firstDigit;
+
+  // Calculate the second digit
   for (let i = 0; i < base.length; i++) {
     sum += parseInt(base[i]) * weight--;
   }
-  const secondDigit = ((sum % 11) < 2 ? 0 : 11 - (sum % 11));
+  const secondDigit = (sum % 11) < 2 ? 0 : 11 - (sum % 11);
 
   return `${firstDigit}${secondDigit}`;
 };
@@ -34,7 +39,7 @@ const generateCNPJ = (formatted: boolean) => {
   let cnpj = Array.from({ length: 12 }, random).join('');
   cnpj += calculateCNPJCheckDigits(cnpj);
   return formatted
-    ? cnpj.replace(/(.{2})(.{3})(.{3})(.{4})(.{2})/, '$1.$2.$3/$4-$5')
+    ? cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5')
     : cnpj;
 };
 
@@ -54,8 +59,9 @@ const calculateCNPJCheckDigits = (base: string) => {
   const firstDigit = calculateDigit(base, weights1);
   const secondDigit = calculateDigit(base + firstDigit, weights2);
 
-  return `${firstDigit}${secondDigit}`;
+  return `${firstDigit}${secondDigit}`; // Corrected here
 };
+
 
 const CPF_CNPJ_Generator: React.FC = () => {
   const [value, setValue] = useState('');

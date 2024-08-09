@@ -23,6 +23,11 @@ const Sidebar: React.FC = () => {
     toggleSidebar();
   };
   
+  const navigateToCpfValidator = () => {
+    router.push('/cpf-cnpj-validator');
+
+    toggleSidebar();
+  };
   const navigateToCepValidator = () => {
     router.push('/cep-validator');
 
@@ -35,12 +40,20 @@ const Sidebar: React.FC = () => {
     toggleSidebar();
   };
 
-  const menuBtn = (
-    <svg
+  
+  // hidden md:block 
+  return (
+    <div className={`fixed top-0 left-0 text-white h-full duration-150 z-20  ${isOpen ? 'w-64 bg-gray-800' : 'w-16 bg-fuchsia-600'} `}>
+      <div className="flex items-center">
+        <button
+          onClick={toggleSidebar}
+          className={`p-2 m-2 text-white ${isOpen ? 'bg-gray-800' : 'bg-fuchsia-600'}  rounded focus:outline-none`}
+        >
+           <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className={`size-8 ${isOpen ? "rotate-90" : ""}`} // Conditional class name
+      className={`size-8 ${isOpen ? "rotate-90" : ""} transition-transform duration-200`}
     >
       <path
         fillRule="evenodd"
@@ -48,16 +61,6 @@ const Sidebar: React.FC = () => {
         clipRule="evenodd"
       />
     </svg>
-  );
-
-  return (
-    <div className={`fixed top-0 left-0 text-white h-full duration-150 ${isOpen ? 'w-64 bg-gray-800' : 'w-16 bg-fuchsia-600'} z-20`}>
-      <div className="flex items-center">
-        <button
-          onClick={toggleSidebar}
-          className={`p-2 m-2 text-white ${isOpen ? 'bg-gray-800' : 'bg-fuchsia-600'} rounded focus:outline-none`}
-        >
-          {menuBtn}
         </button>
         {isOpen && (
           <div className="ml-4">
@@ -91,7 +94,15 @@ const Sidebar: React.FC = () => {
           <li className="p-2">
             <h2 className="text-lg font-semibold text-teal-500">+ Validadores</h2>
             <ul>
-            <li className="p-2 rounded">
+              <li className="p-2 rounded">
+                <button
+                  onClick={navigateToCpfValidator}
+                  className="w-full bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-teal-500 transition"
+                >
+                  CPF/CNPJ
+                </button>
+              </li>
+              <li className="p-2 rounded">
                 <button
                   onClick={navigateToCepValidator}
                   className="w-full bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-teal-500 transition"
@@ -116,7 +127,6 @@ const Sidebar: React.FC = () => {
           </li>
         </ul>
       </nav>
-
     </div>
   );
 };
