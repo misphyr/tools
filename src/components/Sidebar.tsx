@@ -43,7 +43,7 @@ const Sidebar: React.FC = () => {
   
   // hidden md:block 
   return (
-    <div className={`fixed top-0 left-0 text-white h-full duration-150 z-20  ${isOpen ? 'w-64 bg-gray-800' : 'w-16 bg-fuchsia-600'} `}>
+    <div className={`fixed top-0 left-0 text-white h-full duration-300 z-20  ${isOpen ? 'w-64 bg-gray-800' : 'w-16 bg-fuchsia-600'} `}>
       <div className="flex items-center">
         <button
           onClick={toggleSidebar}
@@ -68,7 +68,7 @@ const Sidebar: React.FC = () => {
           </div>
         )}
       </div>
-      <nav className={`${isOpen ? 'block' : 'hidden'} mt-4`}>
+      <nav className={`${isOpen ? 'block' : 'hidden'} mt-4 translation duration-500`}>
         <ul>
           <li className="p-2">
             <h2 className="text-lg font-semibold text-teal-500">+ Geradores</h2>

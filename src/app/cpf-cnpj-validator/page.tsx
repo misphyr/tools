@@ -134,7 +134,7 @@ const CPF_CNPJ_Validator: React.FC = () => {
         </div>
       </div>
       {message && (
-        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-500 -translate-x-1/2 bg-gray-900 text-white px-4 py-2 rounded shadow-lg outline outline-fuchsia-600">
+        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-gray-900 text-white px-4 py-2 rounded shadow-lg outline outline-fuchsia-600">
           {message}
         </div>
       )}
