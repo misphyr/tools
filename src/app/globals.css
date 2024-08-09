@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -19,8 +14,8 @@
 @media (prefers-color-scheme: light) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 17, 24, 39; /* Gray-900 */
-    --background-end-rgb: 17, 24, 39; /* Gray-900 */
+    --background-start-rgb: 0, 0, 0; /* Gray-900 */
+    --background-end-rgb: 0, 0, 0; /* Gray-900 */
   }
 }
 

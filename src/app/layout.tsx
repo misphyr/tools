@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
+import Bar from '../components/Bar';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,16 +14,13 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>)  {
+}>) {
   return (
     <html lang="en">
       <body>
         <div className="flex">
-          <Sidebar />
-          <div className="flex flex-col w-full">
-            <Header />
-            <main className="flex-grow">{children}</main>
-          </div>
+          <Bar />
+          <main className="ml-16 mt-[3.5rem] flex-grow">{children}</main>
         </div>
       </body>
     </html>
