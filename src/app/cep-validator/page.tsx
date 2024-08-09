@@ -61,7 +61,7 @@ const CEP_Validator: React.FC = () => {
     const cleanedCEP = cepInput.replace(/\D/g, ''); // Remove non-numeric characters
 
     if (cleanedCEP.length !== 8) {
-      showTemporaryMessage('Please enter a valid CEP.');
+      showTemporaryMessage('Insira um CEP válido.');
       return;
     }
 
@@ -75,7 +75,7 @@ const CEP_Validator: React.FC = () => {
       if (data.erro) {
         setCep(formattedCEP);
         setAddress(null);
-        showTemporaryMessage('CEP not found.');
+        showTemporaryMessage('CEP não encontrado.');
       } else {
         setCep(formattedCEP);
         setAddress(data);
@@ -84,7 +84,7 @@ const CEP_Validator: React.FC = () => {
     } catch (error) {
       console.error('Error fetching CEP data:', error);
       setAddress(null);
-      showTemporaryMessage('Error fetching data. Please try again.');
+      showTemporaryMessage('Erro ao obter dados. Não foi possível exibir.');
     }
   };
 
