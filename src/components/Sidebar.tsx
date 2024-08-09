@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from 'react';
@@ -12,8 +11,20 @@ const Sidebar: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  const navigateToGenerator = () => {
+  const navigateToCpfGenerator = () => {
     router.push('/cpf-cnpj-generator');
+
+    toggleSidebar();
+  };
+
+  const navigateToCepGenerator = () => {
+    router.push('/cep-generator');
+
+    toggleSidebar();
+  };
+  
+  const navigateToCepValidator = () => {
+    router.push('/cep-validator');
 
     toggleSidebar();
   };
@@ -29,7 +40,7 @@ const Sidebar: React.FC = () => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className={`size-8 ${isOpen ? "" : "rotate-90"}`} // Conditional class name
+      className={`size-8 ${isOpen ? "rotate-90" : ""}`} // Conditional class name
     >
       <path
         fillRule="evenodd"
@@ -40,24 +51,72 @@ const Sidebar: React.FC = () => {
   );
 
   return (
-    <div className={`fixed top-0 left-0 bg-purple-700 text-white h-full transition-all duration-300 ${isOpen ? 'w-64' : 'w-16'} z-20`}>
-      <button onClick={toggleSidebar} className="p-2 m-2 text-white bg-purple-900 rounded focus:outline-none">
-        {menuBtn}
-
-      </button>
+    <div className={`fixed top-0 left-0 text-white h-full duration-150 ${isOpen ? 'w-64 bg-gray-800' : 'w-16 bg-fuchsia-600'} z-20`}>
+      <div className="flex items-center">
+        <button
+          onClick={toggleSidebar}
+          className={`p-2 m-2 text-white ${isOpen ? 'bg-gray-800' : 'bg-fuchsia-600'} rounded focus:outline-none`}
+        >
+          {menuBtn}
+        </button>
+        {isOpen && (
+          <div className="ml-4">
+            <h2 className="text-white text-lg font-semibold">Menu</h2>
+          </div>
+        )}
+      </div>
       <nav className={`${isOpen ? 'block' : 'hidden'} mt-4`}>
         <ul>
-          <li className="p-2 hover:bg-purple-600">
-            <button onClick={navigateToHome}>
-              Home
-            </button></li>
-          <li className="p-2 hover:bg-purple-600">
-            <button onClick={navigateToGenerator}>
-              CPF/CNPJ Generator
-            </button>
+          <li className="p-2">
+            <h2 className="text-lg font-semibold text-teal-500">+ Geradores</h2>
+            <ul>
+              <li className="p-2 rounded">
+                <button
+                  onClick={navigateToCpfGenerator}
+                  className="w-full bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-teal-500 transition"
+                >
+                  CPF/CNPJ
+                </button>
+              </li>
+              <li className="p-2 rounded">
+                <button
+                  onClick={navigateToCepGenerator}
+                  className="w-full bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-teal-500 transition"
+                >
+                  CEP
+                </button>
+              </li>
+            </ul>
+          </li>
+          <li className="p-2">
+            <h2 className="text-lg font-semibold text-teal-500">+ Validadores</h2>
+            <ul>
+            <li className="p-2 rounded">
+                <button
+                  onClick={navigateToCepValidator}
+                  className="w-full bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-teal-500 transition"
+                >
+                  CEP
+                </button>
+              </li>
+            </ul>
+          </li>
+          <li className="p-2 mt-4">
+            <h2 className="text-lg font-semibold text-teal-500">+ Informações</h2>
+            <ul>
+              <li className="p-2 rounded">
+                <button
+                  onClick={navigateToHome}
+                  className="w-full bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-teal-500 transition"
+                >
+                  Sobre
+                </button>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
+
     </div>
   );
 };

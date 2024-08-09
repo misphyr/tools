@@ -59,7 +59,7 @@ const calculateCNPJCheckDigits = (base: string) => {
 
 const CPF_CNPJ_Generator: React.FC = () => {
   const [value, setValue] = useState('');
-  const [isFormatted, setIsFormatted] = useState(false);
+  const [isFormatted, setIsFormatted] = useState(true);
   const [message, setMessage] = useState<string | null>(null);
 
   const handleGenerateCPF = () => {
@@ -83,11 +83,10 @@ const CPF_CNPJ_Generator: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-gray-900 p-8 rounded-lg shadow-lg w-full max-w-lg">
+      <div className="bg-gray-900 p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-fuchsia-600 p-2 rounded">
         <h1 className="text-2xl font-bold text-white">Gerador CPF/CNPJ</h1>
         <p className="mt-4 text-gray-300">Gera um CPF/CNPJ aleatório.</p>
 
-        {/* Readonly input with copy button */}
         <div className="mt-8 flex items-center space-x-4">
           <input
             type="text"
@@ -97,13 +96,12 @@ const CPF_CNPJ_Generator: React.FC = () => {
           />
           <button
             onClick={copyToClipboard}
-            className="bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-fuchsia-900 hover:animate-pulse transition"
+            className="bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-teal-600 transition"
           >
             Copiar
           </button>
         </div>
 
-        {/* Checkbox */}
         <div className="mt-4 flex items-center space-x-2">
           <input
             type="checkbox"
@@ -112,29 +110,26 @@ const CPF_CNPJ_Generator: React.FC = () => {
             onChange={() => setIsFormatted(!isFormatted)}
             className="text-purple-900"
           />
-          <label htmlFor="format-checkbox" className="text-sm text-gray-300">Formatado</label>
+          <label htmlFor="format-checkbox" className="text-sm text-gray-200">Formatado</label>
         </div>
 
-        {/* Generate buttons */}
         <div className="mt-6 flex space-x-4">
           <button
             onClick={handleGenerateCPF}
-            className="bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-fuchsia-900 hover:animate-pulse transition"
+            className="bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-teal-600 transition"
           >
             CPF
           </button>
           <button
             onClick={handleGenerateCNPJ}
-            className="bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-fuchsia-900 hover:animate-pulse transition"
+            className="bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-teal-600 transition"
           >
             CNPJ
           </button>
         </div>
       </div>
-
-      {/* Temporary message */}
       {message && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-4 py-2 rounded shadow-lg">
+        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-500 -translate-x-1/2 bg-gray-900 text-white px-4 py-2 rounded shadow-lg outline outline-fuchsia-600">
           {message}
         </div>
       )}
