@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const Sidebar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
   const toggleSidebar = () => {
@@ -20,7 +20,7 @@ const Sidebar: React.FC = () => {
 
   const navigateToHome = () => {
     router.push('/');
-    
+
     toggleSidebar();
   };
 
@@ -40,7 +40,7 @@ const Sidebar: React.FC = () => {
   );
 
   return (
-    <div className={`fixed top-0 left-0 h-full ${isOpen ? 'w-64' : 'w-16'} bg-purple-700 text-white transition-all duration-300`}>
+    <div className={`fixed top-0 left-0 bg-purple-700 text-white h-full transition-all duration-300 ${isOpen ? 'w-64' : 'w-16'} z-20`}>
       <button onClick={toggleSidebar} className="p-2 m-2 text-white bg-purple-900 rounded focus:outline-none">
         {menuBtn}
 
