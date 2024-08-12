@@ -110,7 +110,7 @@ const Bar: React.FC = () => {
 
 
   return (
-    <div className="flex">
+    <div className="fixed z-40">
       <div className="fixed top-0 left-0 w-full outline bg-primaryPurple outline-neutralLightGray text-white p-2 flex justify-between items-center transition-all duration-300 z-50">
         <div className="text-xl font-bold ml-4 flex items-center">
           <button

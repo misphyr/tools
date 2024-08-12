@@ -91,7 +91,7 @@ const CPF_CNPJ_Generator: React.FC = () => {
     <div className="flex justify-center items-center min-h-screen">
       <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-vibrantPink rounded">
         <h1 className="text-2xl font-bold text-analogousLavender">Gerador CPF/CNPJ</h1>
-        <p className="mt-4 text-neutralLightGray">Gera um CPF/CNPJ aleatório.</p>
+        <p className="mt-4 text-neutralLightGray">Gera um CPF/CNPJ aleatório</p>
 
         <div className="mt-8 flex items-center space-x-4">
           <input
