@@ -149,7 +149,7 @@ const Bar: React.FC = () => {
           />
         </div>
       </div>
-      <div className={`w-64 md:w-80 lg:w-96 bg-neutralDarkGray outline outline-neutralLightGray h-screen ${isOpen ? 'block' : 'hidden'}  `}>
+      <div className={`w-64 md:w-80 lg:w-96 bg-neutralDarkGray outline outline-neutralLightGray ${isOpen ? 'block' : 'hidden'}  `}>
         {menuNavigation}
       </div>
 
