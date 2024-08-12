@@ -17,7 +17,8 @@ const config: Config = {
         neutralDarkGray: '#1F2937',
         neutralLightGray: '#F3F4F6',
         accentGold: '#F59E0B',
-        vibrantPink: '#A855F7'
+        vibrantPink: '#A855F7',
+        charcoal: '#2D3748'
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -29,6 +29,7 @@ const Bar: React.FC = () => {
     }
   }, [isDarkMode]);
 
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -46,7 +47,7 @@ const Bar: React.FC = () => {
 
 
   const menuNavigation = (
-    <nav className={`mt-16 transition duration-500`}>
+    <nav className={`mt-16 transition-all duration-300  ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
       <ul>
         <li className="p-2">
           <h2 className="text-lg font-semibold text-analogousLavender">Geradores</h2>
@@ -106,15 +107,15 @@ const Bar: React.FC = () => {
       </ul>
     </nav>
   );
-  
+
 
   return (
     <div className="flex">
-      <div className="fixed top-0 left-0 w-full outline bg-primaryPurple outline-neutralLightGray text-white p-2 flex justify-between items-center transition-all duration-300">
+      <div className="fixed top-0 left-0 w-full outline bg-primaryPurple outline-neutralLightGray text-white p-2 flex justify-between items-center transition-all duration-300 z-50">
         <div className="text-xl font-bold ml-4 flex items-center">
           <button
             onClick={toggleSidebar}
-            className={`p-2 text-white bg-primaryPurple rounded focus:outline-none`}
+            className={`p-2 text-white bg-primaryPurple rounded focus:outline-none hover:bg-vibrantPink`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +141,7 @@ const Bar: React.FC = () => {
           </button>
           <div className="text-xl font-bold mr-2 underline decoration-neutralDarkGray text-analogousLavender">Misphyr</div>
           <div
-            className="w-12 h-12 rounded-full overflow-hidden border-2 border-white"
+            className="w-12 h-12 rounded-full overflow-hidden border-2 border-neutralDarkGray"
             style={{
               backgroundImage: `url(${avatarUrl})`,
               backgroundSize: 'cover',
@@ -149,9 +150,12 @@ const Bar: React.FC = () => {
           />
         </div>
       </div>
-      <div className={`w-64 md:w-80 lg:w-96 bg-neutralDarkGray outline outline-neutralLightGray ${isOpen ? 'block' : 'hidden'}  `}>
+      <div className={`absolute h-screen w-64 md:w-80 lg:w-96 bg-neutralDarkGray outline outline-neutralLightGray transition-all duration-150 transform 
+        ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} z-40`}
+      >
         {menuNavigation}
       </div>
+
 
     </div>
   );

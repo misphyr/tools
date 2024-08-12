@@ -20,7 +20,7 @@ export default function RootLayout({
       <body>
         <div className="flex">
           <Bar />
-          <main className="ml-16 mt-[3.5rem] flex-grow">{children}</main>
+          <main className=" ml-16 mt-[3.5rem] flex-grow z-20">{children}</main>
         </div>
       </body>
     </html>
