@@ -1,14 +1,11 @@
 "use client";
 import React, { useState } from 'react';
 
-// Utility functions for CPF and CNPJ validation (use the previously provided functions here)
 const isValidCPF = (cpf: string) => {
-  // Remove formatting
   const cleanedCPF = cpf.replace(/\D/g, '');
   
   if (cleanedCPF.length !== 11) return false;
 
-  // Calculate CPF check digits
   const calculateCPFCheckDigits = (base: string) => {
     let sum = 0;
     let weight = 10;
@@ -35,12 +32,10 @@ const isValidCPF = (cpf: string) => {
 };
 
 const isValidCNPJ = (cnpj: string) => {
-  // Remove formatting
   const cleanedCNPJ = cnpj.replace(/\D/g, '');
   
   if (cleanedCNPJ.length !== 14) return false;
 
-  // Calculate CNPJ check digits
   const calculateCNPJCheckDigits = (base: string) => {
     const weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
     const weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
@@ -105,20 +100,21 @@ const CPF_CNPJ_Validator: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-gray-900 p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-fuchsia-600 p-2 rounded">
-        <h1 className="text-2xl font-bold text-white">Validador CPF/CNPJ</h1>
-        <p className="mt-4 text-gray-300">Valida um CPF/CNPJ aleatório.</p>
+      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-analogousMagenta p-2 rounded">
+        <h1 className="text-2xl font-bold text-analogousLavender">Validador CPF/CNPJ</h1>
+        <p className="mt-4 text-neutralLightGray">Valida um CPF/CNPJ aleatório.</p>
 
         <div className="mt-8 flex items-center space-x-4">
           <input
             type="text"
             value={value}
+            placeholder="Digite o CPF/CNPJ"
             onChange={(e) => setValue(e.target.value)}
-            className="p-2 bg-gray-700 text-white rounded border border-gray-600 flex-grow"
+            className="p-2 bg-neutralDarkGray text-neutralLightGray rounded border border-neutralLightGray flex-grow"
           />
           <button
-            onClick={pasteFromClipboard}
-            className="bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-teal-600 transition"
+            onClick={pasteFromClipboard}  
+            className="bg-primaryPurple text-analogousLavender px-4 py-2 rounded hover:bg-analogousMagenta transition"
           >
             Colar
           </button>
@@ -126,7 +122,7 @@ const CPF_CNPJ_Validator: React.FC = () => {
         <div className="mt-6 flex space-x-4">
           <button
             onClick={ValidarCpfCnpj}
-            className="bg-fuchsia-600 text-white px-4 py-2 rounded hover:bg-teal-600 transition"
+            className="bg-primaryPurple text-analogousLavender px-4 py-2 rounded hover:bg-analogousMagenta transition"
           >
             Validar
           </button>
@@ -134,7 +130,7 @@ const CPF_CNPJ_Validator: React.FC = () => {
         </div>
       </div>
       {message && (
-        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-gray-900 text-white px-4 py-2 rounded shadow-lg outline outline-fuchsia-600">
+        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-neutralDarkGray text-analogousLavender px-4 py-2 rounded shadow-lg outline outline-analogousMagenta">
           {message}
         </div>
       )}

@@ -49,12 +49,12 @@ const Bar: React.FC = () => {
     <nav className={`mt-16 transition duration-500`}>
       <ul>
         <li className="p-2">
-          <h2 className="text-lg font-semibold text-teal-500">+ Geradores</h2>
+          <h2 className="text-lg font-semibold text-analogousLavender">Geradores</h2>
           <ul>
             <li className="p-2 rounded">
               <button
                 onClick={() => navigateTo('/cpf-cnpj-generator')}
-                className="w-full bg-fuchsia-400 dark:bg-fuchsia-600 text-gray-800 dark:text-white px-4 py-2 rounded hover:bg-teal-400 dark:hover:bg-teal-500 transition"
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-analogousMagenta transition"
               >
                 CPF/CNPJ
               </button>
@@ -62,7 +62,7 @@ const Bar: React.FC = () => {
             <li className="p-2 rounded">
               <button
                 onClick={() => navigateTo('/cep-generator')}
-                className="w-full bg-fuchsia-400 dark:bg-fuchsia-600 text-gray-800 dark:text-white px-4 py-2 rounded hover:bg-teal-400 dark:hover:bg-teal-500 transition"
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-analogousMagenta transition"
               >
                 CEP
               </button>
@@ -70,12 +70,12 @@ const Bar: React.FC = () => {
           </ul>
         </li>
         <li className="p-2">
-          <h2 className="text-lg font-semibold text-teal-500">+ Validadores</h2>
+          <h2 className="text-lg font-semibold text-analogousLavender">Validadores</h2>
           <ul>
             <li className="p-2 rounded">
               <button
                 onClick={() => navigateTo('/cpf-cnpj-validator')}
-                className="w-full bg-fuchsia-400 dark:bg-fuchsia-600 text-gray-800 dark:text-white px-4 py-2 rounded hover:bg-teal-400 dark:hover:bg-teal-500 transition"
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-analogousMagenta transition"
               >
                 CPF/CNPJ
               </button>
@@ -83,7 +83,7 @@ const Bar: React.FC = () => {
             <li className="p-2 rounded">
               <button
                 onClick={() => navigateTo('/cep-validator')}
-                className="w-full bg-fuchsia-400 dark:bg-fuchsia-600 text-gray-800 dark:text-white px-4 py-2 rounded hover:bg-teal-400 dark:hover:bg-teal-500 transition"
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-analogousMagenta transition"
               >
                 CEP
               </button>
@@ -91,12 +91,12 @@ const Bar: React.FC = () => {
           </ul>
         </li>
         <li className="p-2 mt-4">
-          <h2 className="text-lg font-semibold text-teal-500">+ Informações</h2>
+          <h2 className="text-lg font-semibold text-analogousLavender">Informações</h2>
           <ul>
             <li className="p-2 rounded">
               <button
                 onClick={() => navigateTo('/')}
-                className="w-full bg-fuchsia-400 dark:bg-fuchsia-600 text-gray-800 dark:text-white px-4 py-2 rounded hover:bg-teal-400 dark:hover:bg-teal-500 transition"
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-analogousMagenta transition"
               >
                 Sobre
               </button>
@@ -110,11 +110,11 @@ const Bar: React.FC = () => {
 
   return (
     <div className="flex">
-      <div className="fixed top-0 left-0 w-full outline dark:bg-teal-500 bg-fuchsia-600 dark:outline-fuchsia-600 outline-teal-500  text-white p-2 flex justify-between items-center transition-all duration-300">
+      <div className="fixed top-0 left-0 w-full outline bg-primaryPurple outline-neutralLightGray text-white p-2 flex justify-between items-center transition-all duration-300">
         <div className="text-xl font-bold ml-4 flex items-center">
           <button
             onClick={toggleSidebar}
-            className={`p-2 text-white dark:bg-teal-500 bg-fuchsia-600 rounded focus:outline-none`}
+            className={`p-2 text-white bg-primaryPurple rounded focus:outline-none`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -129,16 +129,16 @@ const Bar: React.FC = () => {
               />
             </svg>
           </button>
-          <span className="ml-4 underline dark:decoration-fuchsia-600 decoration-teal-500">Toolbox</span>
+          <span className="ml-4 underline decoration-neutralDarkGray text-analogousLavender ">Toolbox</span>
         </div>
         <div className="flex items-center mr-4 ">
           <button
             onClick={toggleTheme}
-            className="mr-4 no-underline bg-white dark:bg-gray-800 text-black dark:text-white px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition "
+            className="mr-4 no-underline bg-white text-black px-4 py-2 rounded hover:bg-neutralLightGray transition hidden "
           >
             {isDarkMode ? "Light Mode" : "Dark Mode"}
           </button>
-          <div className="text-xl font-bold mr-2 underline dark:decoration-fuchsia-600 decoration-teal-500">Misphyr</div>
+          <div className="text-xl font-bold mr-2 underline decoration-neutralDarkGray text-analogousLavender">Misphyr</div>
           <div
             className="w-12 h-12 rounded-full overflow-hidden border-2 border-white"
             style={{
@@ -149,7 +149,7 @@ const Bar: React.FC = () => {
           />
         </div>
       </div>
-      <div className={`w-64 md:w-80 lg:w-96 bg-gray-800 outline outline-gray-700 h-screen ${isOpen ? 'block' : 'hidden'}  `}>
+      <div className={`w-64 md:w-80 lg:w-96 bg-neutralDarkGray outline outline-neutralLightGray h-screen ${isOpen ? 'block' : 'hidden'}  `}>
         {menuNavigation}
       </div>
 
