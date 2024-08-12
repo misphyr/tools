@@ -54,7 +54,7 @@ const Bar: React.FC = () => {
             <li className="p-2 rounded">
               <button
                 onClick={() => navigateTo('/cpf-cnpj-generator')}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-analogousMagenta transition"
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 CPF/CNPJ
               </button>
@@ -62,7 +62,7 @@ const Bar: React.FC = () => {
             <li className="p-2 rounded">
               <button
                 onClick={() => navigateTo('/cep-generator')}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-analogousMagenta transition"
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 CEP
               </button>
@@ -75,7 +75,7 @@ const Bar: React.FC = () => {
             <li className="p-2 rounded">
               <button
                 onClick={() => navigateTo('/cpf-cnpj-validator')}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-analogousMagenta transition"
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 CPF/CNPJ
               </button>
@@ -83,7 +83,7 @@ const Bar: React.FC = () => {
             <li className="p-2 rounded">
               <button
                 onClick={() => navigateTo('/cep-validator')}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-analogousMagenta transition"
+                className="w-full px-4 py-2 rounded bg-primaryPurple  text-neutralLightGray hover:bg-vibrantPink   transition"
               >
                 CEP
               </button>
@@ -96,7 +96,7 @@ const Bar: React.FC = () => {
             <li className="p-2 rounded">
               <button
                 onClick={() => navigateTo('/')}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-analogousMagenta transition"
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 Sobre
               </button>

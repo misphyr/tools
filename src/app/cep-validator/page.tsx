@@ -86,7 +86,7 @@ const CEP_Validator: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-analogousMagenta">
+      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-vibrantPink">
         <h1 className="text-analogousLavender text-2xl font-bold mb-4">Validador de CEP</h1>
 
         <div className="mb-4">
@@ -99,7 +99,7 @@ const CEP_Validator: React.FC = () => {
           />
           <button
             onClick={handleValidateCEP}
-            className="w-full bg-primaryPurple text-neutralLightGray px-4 py-2 rounded hover:bg-analogousMagenta transition"
+            className="w-full bg-primaryPurple text-neutralLightGray px-4 py-2 rounded hover:bg-vibrantPink transition"
           >
             Validar CEP
           </button>
@@ -107,7 +107,7 @@ const CEP_Validator: React.FC = () => {
 
         {cep && address && (
           <div className="mt-4 p-4 bg-neutralDarkGray text-neutralLightGray rounded">
-            <p><h4 className="text-2xl text-analogousMagenta">CEP Válido!</h4></p>
+            <p><h4 className="text-2xl text-vibrantPink">CEP Válido!</h4></p>
             <div className="mt-2">
               <p><strong>Cep:</strong> {cep}</p>
               <p><strong>Endereço:</strong> {address.logradouro}</p>
@@ -127,7 +127,7 @@ const CEP_Validator: React.FC = () => {
       </div>
 
       {message && (
-        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-neutralDarkGray text-analogousLavender px-4 py-2 rounded shadow-lg outline outline-analogousMagenta">
+        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-neutralDarkGray text-analogousLavender px-4 py-2 rounded shadow-lg outline outline-vibrantPink">
          {message}
         </div>
       )}

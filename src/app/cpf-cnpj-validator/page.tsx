@@ -100,7 +100,7 @@ const CPF_CNPJ_Validator: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-analogousMagenta p-2 rounded">
+      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-vibrantPink p-2 rounded">
         <h1 className="text-2xl font-bold text-analogousLavender">Validador CPF/CNPJ</h1>
         <p className="mt-4 text-neutralLightGray">Valida um CPF/CNPJ aleatório.</p>
 
@@ -114,7 +114,7 @@ const CPF_CNPJ_Validator: React.FC = () => {
           />
           <button
             onClick={pasteFromClipboard}  
-            className="bg-primaryPurple text-analogousLavender px-4 py-2 rounded hover:bg-analogousMagenta transition"
+            className="bg-primaryPurple text-analogousLavender px-4 py-2 rounded hover:bg-vibrantPink transition"
           >
             Colar
           </button>
@@ -122,7 +122,7 @@ const CPF_CNPJ_Validator: React.FC = () => {
         <div className="mt-6 flex space-x-4">
           <button
             onClick={ValidarCpfCnpj}
-            className="bg-primaryPurple text-analogousLavender px-4 py-2 rounded hover:bg-analogousMagenta transition"
+            className="bg-primaryPurple text-analogousLavender px-4 py-2 rounded hover:bg-vibrantPink transition"
           >
             Validar
           </button>
@@ -130,7 +130,7 @@ const CPF_CNPJ_Validator: React.FC = () => {
         </div>
       </div>
       {message && (
-        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-neutralDarkGray text-analogousLavender px-4 py-2 rounded shadow-lg outline outline-analogousMagenta">
+        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-neutralDarkGray text-analogousLavender px-4 py-2 rounded shadow-lg outline outline-vibrantPink">
           {message}
         </div>
       )}
