@@ -111,7 +111,7 @@ const Bar: React.FC = () => {
 
   return (
     <div className="fixed z-40">
-      <div className="fixed top-0 left-0 w-full outline bg-primaryPurple outline-neutralLightGray text-white p-2 flex justify-between items-center transition-all duration-300 z-50">
+      <div className="fixed top-0 left-0 w-full  bg-primaryPurple shadow text-white p-2 flex justify-between items-center transition-all duration-300 z-50">
         <div className="text-xl font-bold ml-4 flex items-center">
           <button
             onClick={toggleSidebar}
@@ -150,7 +150,7 @@ const Bar: React.FC = () => {
           />
         </div>
       </div>
-      <div className={`absolute h-screen w-64 md:w-80 lg:w-96 bg-neutralDarkGray outline outline-neutralLightGray transition-all duration-150 transform 
+      <div className={`absolute h-screen w-64 md:w-80 lg:w-96 bg-neutralDarkGray shadow transition-all duration-150 transform 
         ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} z-40`}
       >
         {menuNavigation}
