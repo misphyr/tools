@@ -43,7 +43,7 @@ const Bar: React.FC = () => {
     setIsOpen(false); // Close the sidebar when navigating
   };
 
-  const avatarUrl = `https://cdn.discordapp.com/avatars/343957098184572958/a_966ba3717fc36728b3b66976aefe2cd8.gif`;
+  const avatarUrl = `https://cdn.discordapp.com/avatars/343957098184572958/a_6b8c6c1f54ed411854ebc226b7ace836.gif`;
 
 
   const menuNavigation = (
@@ -54,7 +54,7 @@ const Bar: React.FC = () => {
           <ul>
             <li className="p-2 rounded">
               <button
-                onClick={() => navigateTo('/cpf-cnpj-generator')}
+                onClick={() => navigateTo('/geradores/cpf-cnpj')}
                 className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 CPF/CNPJ
@@ -62,10 +62,18 @@ const Bar: React.FC = () => {
             </li>
             <li className="p-2 rounded">
               <button
-                onClick={() => navigateTo('/cep-generator')}
+                onClick={() => navigateTo('/geradores/cep')}
                 className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 CEP
+              </button>
+            </li>
+            <li className="p-2 rounded">
+              <button
+                onClick={() => navigateTo('/geradores/cdas')}
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
+              >
+                CDAS
               </button>
             </li>
           </ul>
@@ -75,7 +83,7 @@ const Bar: React.FC = () => {
           <ul>
             <li className="p-2 rounded">
               <button
-                onClick={() => navigateTo('/cpf-cnpj-validator')}
+                onClick={() => navigateTo('/validadores/cpf-cnpj')}
                 className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 CPF/CNPJ
@@ -83,7 +91,7 @@ const Bar: React.FC = () => {
             </li>
             <li className="p-2 rounded">
               <button
-                onClick={() => navigateTo('/cep-validator')}
+                onClick={() => navigateTo('/validadores/cep')}
                 className="w-full px-4 py-2 rounded bg-primaryPurple  text-neutralLightGray hover:bg-vibrantPink   transition"
               >
                 CEP
