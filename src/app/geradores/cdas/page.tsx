@@ -7,12 +7,13 @@ import { cdaGenerator } from '../../../utils/cdaGenerator';
 
 const JsonGenerator: React.FC = () => {
   const [message, setMessage] = useState<string | null>(null);
+  const [isEditable, setIsEditable] = useState(true);
   const handleDownload = () => {
     const data = cdaGenerator();
 
     downloadJson(data, 'cda-teste');
     showTemporaryMessage('Cda Gerada com Sucesso!!');
-  }; 
+  };
 
   const showTemporaryMessage = (msg: string) => {
     setMessage(msg);
@@ -28,9 +29,19 @@ const JsonGenerator: React.FC = () => {
 
 
         <div className="mt-6 flex space-x-4">
-          <input type="number" ></input>
+          {/* <div className="mt-4 flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="edit-checkbox"
+              checked={isEditable}
+              onChange={() => setIsEditable(!isEditable)}
+              className="text-primaryPurple"
+            />
+            <label htmlFor="edit-checkbox" className="text-sm text-neutralLightGray">Editar</label>
+          </div> */}
           <button
             onClick={handleDownload}
+            id="download-button"
             className="bg-primaryPurple text-neutralLightGray px-4 py-2 rounded hover:bg-vibrantPink transition"
           >
             Baixar Cda

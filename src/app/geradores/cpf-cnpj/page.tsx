@@ -1,66 +1,7 @@
 "use client"
 import React, { useState } from 'react';
+import { cpfGenerator, cnpjGenerator } from '@/utils/utils';
 
-const generateCPF = (formatted: boolean) => {
-  const random = () => Math.floor(Math.random() * 10);
-  let cpf = Array.from({ length: 9 }, random).join('');
-  cpf += calculateCPFCheckDigits(cpf);
-  return formatted
-    ? cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
-    : cpf;
-};
-
-const calculateCPFCheckDigits = (base: string) => {
-  let sum = 0;
-  let weight = 10;
-
-  // Calculate the first digit
-  for (let i = 0; i < base.length; i++) {
-    sum += parseInt(base[i]) * weight--;
-  }
-  const firstDigit = (sum % 11) < 2 ? 0 : 11 - (sum % 11);
-
-  // Reset for the second digit calculation
-  sum = 0;
-  weight = 11;
-  base += firstDigit;
-
-  // Calculate the second digit
-  for (let i = 0; i < base.length; i++) {
-    sum += parseInt(base[i]) * weight--;
-  }
-  const secondDigit = (sum % 11) < 2 ? 0 : 11 - (sum % 11);
-
-  return `${firstDigit}${secondDigit}`;
-};
-
-const generateCNPJ = (formatted: boolean) => {
-  const random = () => Math.floor(Math.random() * 10);
-  let cnpj = Array.from({ length: 12 }, random).join('');
-  cnpj += calculateCNPJCheckDigits(cnpj);
-  return formatted
-    ? cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5')
-    : cnpj;
-};
-
-const calculateCNPJCheckDigits = (base: string) => {
-  const weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-  const weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-
-  const calculateDigit = (base: string, weights: number[]) => {
-    let sum = 0;
-    for (let i = 0; i < base.length; i++) {
-      sum += parseInt(base[i]) * weights[i];
-    }
-    const remainder = sum % 11;
-    return remainder < 2 ? 0 : 11 - remainder;
-  };
-
-  const firstDigit = calculateDigit(base, weights1);
-  const secondDigit = calculateDigit(base + firstDigit, weights2);
-
-  return `${firstDigit}${secondDigit}`; // Corrected here
-};
 
 
 const CPF_CNPJ_Generator: React.FC = () => {
@@ -69,11 +10,11 @@ const CPF_CNPJ_Generator: React.FC = () => {
   const [message, setMessage] = useState<string | null>(null);
 
   const handleGenerateCPF = () => {
-    setValue(generateCPF(isFormatted));
+    setValue(cpfGenerator(isFormatted));
   };
 
   const handleGenerateCNPJ = () => {
-    setValue(generateCNPJ(isFormatted));
+    setValue(cnpjGenerator(isFormatted));
   };
 
   const copyToClipboard = () => {
