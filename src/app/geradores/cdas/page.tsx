@@ -10,7 +10,8 @@ const JsonGenerator: React.FC = () => {
   const handleDownload = () => {
     const data = cdaGenerator();
 
-    downloadJson(data, 'meu-json'); // Gera o arquivo com o nome 'meu-json.json'
+    downloadJson(data, 'cda-teste');
+    showTemporaryMessage('Cda Gerada com Sucesso!!');
   }; 
 
   const showTemporaryMessage = (msg: string) => {
@@ -27,7 +28,7 @@ const JsonGenerator: React.FC = () => {
 
 
         <div className="mt-6 flex space-x-4">
-          
+          <input type="number" ></input>
           <button
             onClick={handleDownload}
             className="bg-primaryPurple text-neutralLightGray px-4 py-2 rounded hover:bg-vibrantPink transition"
