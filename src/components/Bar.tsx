@@ -49,6 +49,19 @@ const Bar: React.FC = () => {
   const menuNavigation = (
     <nav className={`mt-16 transition-all duration-300  ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
       <ul>
+      <li className="p-2">
+          <h2 className="text-lg font-semibold text-analogousLavender">Utilitários</h2>
+          <ul>
+            <li className="p-2 rounded">
+              <button
+                onClick={() => navigateTo('/utils/caracteres')}
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
+              >
+                Formatador
+              </button>
+            </li>
+          </ul>
+        </li>
         <li className="p-2">
           <h2 className="text-lg font-semibold text-analogousLavender">Geradores</h2>
           <ul>
