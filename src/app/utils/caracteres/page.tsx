@@ -66,8 +66,8 @@ const Caracteres_utils: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-vibrantPink p-2">
+    <div className="flex justify-center items-center min-h-screen min-w-fit overflow-auto">
+      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-vibrantPink p-2 min-w-fit ">
         <h1 className="text-2xl font-bold text-analogousLavender">Formatador</h1>
         <p className="mt-4 text-neutralLightGray">Formatar textos</p>
 
@@ -76,7 +76,7 @@ const Caracteres_utils: React.FC = () => {
             value={value}
             onChange={handleChange}
             placeholder="Digite seu texto"
-            className="p-4 bg-neutralDarkGray text-neutralLightGray rounded border border-neutralLightGray w-full h-60 text-lg"
+            className="p-4 bg-neutralDarkGray text-neutralLightGray rounded border border-neutralLightGray w-full h-16 text-lg"
           />
           <p className="mt-2 text-neutralLightGray">
             Número de caracteres: <span className="font-bold">{value.length}</span><br />

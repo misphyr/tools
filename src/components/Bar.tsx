@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 const Bar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const router = useRouter();
 
@@ -47,7 +47,7 @@ const Bar: React.FC = () => {
 
 
   const menuNavigation = (
-    <nav className={`mt-16 transition-all duration-300  ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
+    <nav className={`mt-16 transition-all duration-300 max-h-[85vh] overflow-y-auto ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 '}`}>
       <ul>
       <li className="p-2">
           <h2 className="text-lg font-semibold text-analogousLavender">Utilitários</h2>
@@ -112,7 +112,7 @@ const Bar: React.FC = () => {
             </li>
           </ul>
         </li>
-        <li className="p-2 mt-4">
+        {/* <li className="p-2 mt-4">
           <h2 className="text-lg font-semibold text-analogousLavender">Informações</h2>
           <ul>
             <li className="p-2 rounded">
@@ -124,7 +124,7 @@ const Bar: React.FC = () => {
               </button>
             </li>
           </ul>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );
@@ -132,11 +132,11 @@ const Bar: React.FC = () => {
 
   return (
     <div className="fixed z-40">
-      <div className="fixed top-0 left-0 w-full  bg-primaryPurple shadow text-white p-2 flex justify-between items-center transition-all duration-300 z-50">
+      <div className="fixed top-0 left-0 w-full  bg-primaryPurple shadow text-neutralLightGray p-2 flex justify-between items-center transition-all duration-300 z-50">
         <div className="text-xl font-bold ml-4 flex items-center">
           <button
             onClick={toggleSidebar}
-            className={`p-2 text-white bg-primaryPurple rounded focus:outline-none hover:bg-vibrantPink`}
+            className={`p-2 text-neutralLightGray bg-primaryPurple rounded focus:outline-none hover:bg-vibrantPink`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -151,12 +151,17 @@ const Bar: React.FC = () => {
               />
             </svg>
           </button>
-          <span className="ml-4 underline decoration-neutralDarkGray text-analogousLavender ">Toolbox</span>
+          <div
+            onClick={() => navigateTo('/')}
+            className="cursor-pointer ml-4 underline decoration-neutralDarkGray text-analogousLavender"
+          >
+            Toolbox
+          </div>
         </div>
         <div className="flex items-center mr-4 ">
           <button
             onClick={toggleTheme}
-            className="mr-4 no-underline bg-white text-black px-4 py-2 rounded hover:bg-neutralLightGray transition hidden "
+            className="mr-4 no-underline bg-white text-neutralDarkGray px-4 py-2 rounded hover:bg-neutralLightGray transition hidden "
           >
             {isDarkMode ? "Light Mode" : "Dark Mode"}
           </button>
@@ -171,7 +176,7 @@ const Bar: React.FC = () => {
           />
         </div>
       </div>
-      <div className={`absolute h-screen w-64 md:w-80 lg:w-96 bg-neutralDarkGray shadow transition-all duration-150 transform 
+      <div className={`absolute h-screen w-64 md:w-80 lg:w-96 bg-neutralDarkGray shadow transition-all duration-150 transform border-4 border-transparent border-r-primaryPurple
         ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} z-40`}
       >
         {menuNavigation}
