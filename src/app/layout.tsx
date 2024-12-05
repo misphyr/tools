@@ -18,9 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="flex"  tabIndex={-1}>
+        <div className="flex" tabIndex={-1}>
           <Bar />
-          <main className="ml-16 flex-grow z-20 "  tabIndex={-1}>{children}</main>
+          <main className="flex-grow z-20  mt-8 sm:mt-0" tabIndex={-1}>{children}</main>
         </div>
       </body>
     </html>

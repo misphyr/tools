@@ -24,6 +24,16 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      }, 
+      screens: {
+        'sm': '600px',
+        // => @media (min-width: 576px) { ... }
+  
+        'md': '720px',
+        // => @media (min-width: 960px) { ... }
+  
+        'lg': '1440px',
+        // => @media (min-width: 1440px) { ... }
       },
     },
   },
