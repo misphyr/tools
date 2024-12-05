@@ -43,7 +43,7 @@ const Bar: React.FC = () => {
     setIsOpen(false); // Close the sidebar when navigating
   };
 
-  const avatarUrl = `https://cdn.discordapp.com/avatars/343957098184572958/a_6b8c6c1f54ed411854ebc226b7ace836.gif`;
+  const avatarUrl = `https://cdn.discordapp.com/avatars/343957098184572958/a_bcbd511451310eaa15e351a590a54c1a.gif`;
 
 
   const menuNavigation = (
