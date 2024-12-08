@@ -17,10 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <div className="flex" tabIndex={-1}>
+      <body className="h-screen ">
+        <div className="flex flex-col gap-1 h-full w-full overflow-hidden">
           <Bar />
-          <main className="flex-grow z-20  mt-8 sm:mt-0" tabIndex={-1}>{children}</main>
+          <main className="flex justify-center items-center h-full w-full z-20 overflow-y-auto overflow-visible">
+            {children}
+            </main>
         </div>
       </body>
     </html>

@@ -36,7 +36,7 @@ const Caracteres_utils: React.FC = () => {
       sanitizedText = sanitizedText.replace(/[0-9]/g, '');
     }
     if (removeLetters) {
-      sanitizedText = sanitizedText.replace(/[a-zA-Z]/g, '');
+      sanitizedText = sanitizedText.replace(/[a-zA-ZáéíóúãâêîôûàèìòùçÁÉÍÓÚÃÂÊÎÔÛÀÈÌÒÙÇ]/g, '');
     }
     if (removeDoubleSpaces) {
       sanitizedText = sanitizedText.replace(/\s+/g, ' ').trim();
@@ -66,8 +66,7 @@ const Caracteres_utils: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen min-w-fit overflow-auto">
-      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-vibrantPink p-2 min-w-fit ">
+      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg max-h-[80dvh] outline outline-vibrantPink p-2 min-w-fit overflow-y-auto  ">
         <h1 className="text-2xl font-bold text-analogousLavender">Formatador</h1>
         <p className="mt-4 text-neutralLightGray">Formatar textos</p>
 
@@ -165,7 +164,6 @@ const Caracteres_utils: React.FC = () => {
             Formatar
           </button>
           </div>
-        </div>
 
         {error && (
           <div className="mt-4 p-4 bg-accentGold text-neutralLightGray rounded">

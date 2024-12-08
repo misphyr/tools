@@ -29,7 +29,6 @@ const CPF_CNPJ_Generator: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
       <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-vibrantPink rounded">
         <h1 className="text-2xl font-bold text-analogousLavender">Gerador CPF/CNPJ</h1>
         <p className="mt-4 text-neutralLightGray">Gera um CPF/CNPJ aleatório</p>
@@ -74,7 +73,6 @@ const CPF_CNPJ_Generator: React.FC = () => {
             CNPJ
           </button>
         </div>
-      </div>
       {message && (
         <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-neutralDarkGray text-analogousLavender px-4 py-2 rounded shadow-lg outline outline-vibrantPink">
           {message}

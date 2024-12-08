@@ -47,14 +47,18 @@ const Bar: React.FC = () => {
 
 
   const menuNavigation = (
-    <nav className={`mt-16 transition-all duration-300 max-h-[85vh] overflow-y-auto ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 '}`}>
+    <nav
+      className={`mt-16 transition-all duration-300 max-h-[85vh] overflow-y-auto ${
+        isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
+      }`}
+    >
       <ul>
-      <li className="p-2">
+        <li className="p-2">
           <h2 className="text-lg font-semibold text-analogousLavender">Utilitários</h2>
           <ul>
             <li className="p-2 rounded">
               <button
-                onClick={() => navigateTo('/utils/caracteres')}
+                onClick={() => navigateTo("/utils/caracteres")}
                 className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 Formatador
@@ -67,7 +71,7 @@ const Bar: React.FC = () => {
           <ul>
             <li className="p-2 rounded">
               <button
-                onClick={() => navigateTo('/geradores/cpf-cnpj')}
+                onClick={() => navigateTo("/geradores/cpf-cnpj")}
                 className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 CPF/CNPJ
@@ -75,7 +79,7 @@ const Bar: React.FC = () => {
             </li>
             <li className="p-2 rounded">
               <button
-                onClick={() => navigateTo('/geradores/cep')}
+                onClick={() => navigateTo("/geradores/cep")}
                 className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 CEP
@@ -83,7 +87,7 @@ const Bar: React.FC = () => {
             </li>
             <li className="p-2 rounded">
               <button
-                onClick={() => navigateTo('/geradores/cdas')}
+                onClick={() => navigateTo("/geradores/cdas")}
                 className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 CDAS
@@ -96,7 +100,7 @@ const Bar: React.FC = () => {
           <ul>
             <li className="p-2 rounded">
               <button
-                onClick={() => navigateTo('/validadores/cpf-cnpj')}
+                onClick={() => navigateTo("/validadores/cpf-cnpj")}
                 className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 CPF/CNPJ
@@ -104,45 +108,32 @@ const Bar: React.FC = () => {
             </li>
             <li className="p-2 rounded">
               <button
-                onClick={() => navigateTo('/validadores/cep')}
-                className="w-full px-4 py-2 rounded bg-primaryPurple  text-neutralLightGray hover:bg-vibrantPink   transition"
+                onClick={() => navigateTo("/validadores/cep")}
+                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
               >
                 CEP
               </button>
             </li>
           </ul>
         </li>
-        {/* <li className="p-2 mt-4">
-          <h2 className="text-lg font-semibold text-analogousLavender">Informações</h2>
-          <ul>
-            <li className="p-2 rounded">
-              <button
-                onClick={() => navigateTo('/')}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
-              >
-                Sobre
-              </button>
-            </li>
-          </ul>
-        </li> */}
       </ul>
     </nav>
   );
-
-
+  
   return (
-    <div className="fixed z-40">
-      <div className="fixed top-0 left-0 w-full  bg-primaryPurple shadow text-neutralLightGray p-2 flex justify-between items-center transition-all duration-300 z-50">
+    <aside className="flex flex-col w-full">
+      {/* Header */}
+      <div className="sticky z-40 w-full bg-primaryPurple shadow text-neutralLightGray p-2 flex justify-between items-center transition-all duration-300 z-50">
         <div className="text-xl font-bold ml-4 flex items-center">
           <button
             onClick={toggleSidebar}
-            className={`p-2 text-neutralLightGray bg-primaryPurple rounded focus:outline-none hover:bg-vibrantPink`}
+            className="p-2 text-neutralLightGray bg-primaryPurple rounded focus:outline-none hover:bg-vibrantPink"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className={`w-8 h-8 ${isOpen ? 'rotate-90' : ''} transition duration-300`}
+              className={`w-8 h-8 ${isOpen ? "rotate-90" : ""} transition duration-300`}
             >
               <path
                 fillRule="evenodd"
@@ -152,39 +143,35 @@ const Bar: React.FC = () => {
             </svg>
           </button>
           <div
-            onClick={() => navigateTo('/')}
+            onClick={() => navigateTo("/")}
             className="cursor-pointer ml-4 underline decoration-neutralDarkGray text-analogousLavender"
           >
             Toolbox
           </div>
         </div>
-        <div className="flex items-center mr-4 ">
-          <button
-            onClick={toggleTheme}
-            className="mr-4 no-underline bg-white text-neutralDarkGray px-4 py-2 rounded hover:bg-neutralLightGray transition hidden "
-          >
-            {isDarkMode ? "Light Mode" : "Dark Mode"}
-          </button>
+        <div className="flex items-center mr-4">
           <div className="text-xl font-bold mr-2 underline decoration-neutralDarkGray text-analogousLavender">Misphyr</div>
           <div
             className="w-12 h-12 rounded-full overflow-hidden border-2 border-neutralDarkGray"
             style={{
               backgroundImage: `url(${avatarUrl})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           />
         </div>
       </div>
-      <div className={`absolute h-screen w-64 md:w-80 lg:w-96 bg-neutralDarkGray shadow transition-all duration-150 transform border-4 border-transparent border-r-primaryPurple
-        ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} z-40`}
+      {/* Sidebar */}
+      <div
+        className={`absolute h-screen w-64 sm:w-80 lg:w-96 bg-neutralDarkGray shadow transition-all duration-150 transform border-4 border-transparent border-r-primaryPurple ${
+          isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
+        } z-40`}
       >
         {menuNavigation}
       </div>
-
-
-    </div>
+    </aside>
   );
+  
 };
 
 export default Bar;
