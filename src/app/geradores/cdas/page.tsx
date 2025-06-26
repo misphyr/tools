@@ -1,57 +1,55 @@
 "use client"
 import React, { useState } from 'react';
+import ToolPage from '../../../components/ToolPage';
+import Toast from '../../../components/Toast';
 import { downloadJson } from '../../../utils/downloadJson';
 import { cdaGenerator } from '../../../utils/cdaGenerator';
 
-
-
 const JsonGenerator: React.FC = () => {
-  const [message, setMessage] = useState<string | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isEditable, setIsEditable] = useState(true);
+  
   const handleDownload = () => {
     const data = cdaGenerator();
-
     downloadJson(data, 'cda-teste');
-    showTemporaryMessage('Cda Gerada com Sucesso!!');
+    setToastMessage('CDA Gerada com Sucesso!');
   };
 
-  const showTemporaryMessage = (msg: string) => {
-    setMessage(msg);
-    setTimeout(() => setMessage(null), 3000);
+  const closeToast = () => {
+    setToastMessage(null);
   };
 
   return (
-      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-vibrantPink rounded">
-        <h1 className="text-2xl font-bold text-analogousLavender">Gerador de Cda</h1>
-        <p className="mt-4 text-neutralLightGray">Gera uma cda com os parâmetros indicados</p>
-        <p className="mt-4 text-neutralLightGray">Em Construção...</p>
+    <ToolPage 
+      title="Gerador de CDA" 
+      description="Gera uma CDA com os parâmetros indicados"
+      icon="📄"
+      category="geradores"
+    >
+      <div className="space-y-6">
+        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+          <p className="text-yellow-400 font-medium">🚧 Em Construção...</p>
+          <p className="text-gray-400 text-sm mt-1">Esta ferramenta está sendo aprimorada.</p>
+        </div>
 
-
-        <div className="mt-6 flex space-x-4">
-          {/* <div className="mt-4 flex items-center space-x-2">
-            <input
-              type="checkbox"
-              id="edit-checkbox"
-              checked={isEditable}
-              onChange={() => setIsEditable(!isEditable)}
-              className="text-primaryPurple"
-            />
-            <label htmlFor="edit-checkbox" className="text-sm text-neutralLightGray">Editar</label>
-          </div> */}
+        <div className="flex justify-center">
           <button
             onClick={handleDownload}
-            id="download-button"
-            className="bg-primaryPurple text-neutralLightGray px-4 py-2 rounded hover:bg-vibrantPink transition"
+            className="btn-primary px-8 py-3"
           >
-            Baixar Cda
+            📥 Baixar CDA
           </button>
         </div>
-      {message && (
-        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-neutralDarkGray text-analogousLavender px-4 py-2 rounded shadow-lg outline outline-vibrantPink">
-          {message}
-        </div>
+      </div>
+
+      {toastMessage && (
+        <Toast 
+          message={toastMessage} 
+          type="success"
+          onClose={closeToast}
+        />
       )}
-    </div>
+    </ToolPage>
   );
 };
 

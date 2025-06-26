@@ -1,33 +1,24 @@
 "use client";
 import React, { useState } from 'react';
+import ToolPage from '../../../components/ToolPage';
+import Toast from '../../../components/Toast';
 
-const Caracteres_utils: React.FC = () => {
+const CharacterUtils: React.FC = () => {
   const [value, setValue] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [message, setMessage] = useState<string | null>(null);
   const [wordCount, setWordCount] = useState(0);
-
-  const [removeSpecificWords, setRemoveSpecificWords] = useState(false);
-  const [specificWords, setSpecificWords] = useState('');
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
   
+  // Opções de formatação
   const [removeNumbers, setRemoveNumbers] = useState(false);
-  const [removeDoubleSpaces, setRemoveDoubleSpaces] = useState(false);
   const [removeLetters, setRemoveLetters] = useState(false);
+  const [removeDoubleSpaces, setRemoveDoubleSpaces] = useState(false);
   const [removeSpecific, setRemoveSpecific] = useState(false);
+  const [removeSpecificWords, setRemoveSpecificWords] = useState(false);
   const [specificChars, setSpecificChars] = useState('');
+  const [specificWords, setSpecificWords] = useState('');
 
   const showTemporaryMessage = (msg: string) => {
-    setMessage(msg);
-    setTimeout(() => setMessage(null), 3000);
-  };
-
-  const pasteFromClipboard = () => {
-    navigator.clipboard.readText().then((text) => {
-      setValue(text);
-      showTemporaryMessage('Texto Colado!');
-    }).catch((err) => {
-      showTemporaryMessage('Erro ao colar o texto.');
-    });
+    setToastMessage(msg);
   };
 
   const sanitizeText = () => {
@@ -42,7 +33,7 @@ const Caracteres_utils: React.FC = () => {
       sanitizedText = sanitizedText.replace(/\s+/g, ' ').trim();
     }
     if (removeSpecific && specificChars) {
-      const regex = new RegExp(`[${specificChars}]`, 'g');
+      const regex = new RegExp(`[${specificChars.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}]`, 'g');
       sanitizedText = sanitizedText.replace(regex, '');
     }
     if (removeSpecificWords && specificWords) {
@@ -54,132 +45,198 @@ const Caracteres_utils: React.FC = () => {
     }
 
     setValue(sanitizedText);
-  
+    setWordCount(sanitizedText.split(/\s+/).filter(Boolean).length);
     showTemporaryMessage('Texto Formatado!');
   };
-  
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
-    setValue(e.target.value);
+    setValue(text);
     setWordCount(text.split(/\s+/).filter(Boolean).length);
   };
 
-  return (
-      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg max-h-[80dvh] outline outline-vibrantPink p-2 min-w-fit overflow-y-auto  ">
-        <h1 className="text-2xl font-bold text-analogousLavender">Formatador</h1>
-        <p className="mt-4 text-neutralLightGray">Formatar textos</p>
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(value).then(() => {
+      showTemporaryMessage('Texto copiado para a área de transferência!');
+    }).catch(() => {
+      showTemporaryMessage('Erro ao copiar texto.');
+    });
+  };
 
-        <div className="mt-4">
+  const pasteFromClipboard = () => {
+    navigator.clipboard.readText().then(text => {
+      setValue(text);
+      setWordCount(text.split(/\s+/).filter(Boolean).length);
+      showTemporaryMessage('Texto colado!');
+    }).catch(() => {
+      showTemporaryMessage('Erro ao colar texto.');
+    });
+  };
+
+  const clearText = () => {
+    setValue('');
+    setWordCount(0);
+    showTemporaryMessage('Texto limpo!');
+  };
+
+  const closeToast = () => {
+    setToastMessage(null);
+  };
+
+  return (
+    <ToolPage 
+      title="Formatador de Texto" 
+      description="Ferramenta completa para formatação e sanitização de texto"
+      icon="�"
+      category="utils"
+    >
+      <div className="space-y-6">
+        <div>
           <textarea
+            id="text-input"
             value={value}
             onChange={handleChange}
-            placeholder="Digite seu texto"
-            className="p-4 bg-neutralDarkGray text-neutralLightGray rounded border border-neutralLightGray w-full h-16 text-lg"
+            placeholder="Digite seu texto aqui..."
+            className="input-modern w-full h-48 resize-vertical"
           />
-          <p className="mt-2 text-neutralLightGray">
-            Número de caracteres: <span className="font-bold">{value.length}</span><br />
-            Número de palavras: <span className="font-bold">{wordCount}</span>
-          </p>
-          <div className="mt-4">
-            <label className="flex items-center text-neutralLightGray">
-              <input
-                type="checkbox"
-                checked={removeNumbers}
-                onChange={() => setRemoveNumbers(!removeNumbers)}
-                className="mr-2"
-              />
-              Remover números
-            </label>
-            <label className="flex items-center text-neutralLightGray mt-2">
-              <input
-                type="checkbox"
-                checked={removeLetters}
-                onChange={() => setRemoveLetters(!removeLetters)}
-                className="mr-2"
-              />
-              Remover letras
-            </label>
-            <label className="flex items-center text-neutralLightGray mt-2">
-              <input
-                type="checkbox"
-                checked={removeDoubleSpaces}
-                onChange={() => setRemoveDoubleSpaces(!removeDoubleSpaces)}
-                className="mr-2"
-              />
-              Remover espaços duplicados
-            </label>
-            <label className="flex items-center text-neutralLightGray mt-2">
-              <input
-                type="checkbox"
-                checked={removeSpecific}
-                onChange={() => setRemoveSpecific(!removeSpecific)}
-                className="mr-2"
-              />
-              Remover caracteres específicos
-            </label>
-            {removeSpecific && (
-              <input
-                type="text"
-                value={specificChars}
-                onChange={(e) => setSpecificChars(e.target.value)}
-                placeholder="Digite os caracteres todos juntos"
-                className="p-2 mt-2 bg-neutralDarkGray text-neutralLightGray rounded border border-neutralLightGray w-full"
-              />
-            )}
-            <label className="flex items-center text-neutralLightGray mt-2">
-              <input
-                type="checkbox"
-                checked={removeSpecificWords}
-                onChange={(e) => setRemoveSpecificWords(e.target.checked)}
-                className="mr-2"
-              />
-              Remover palavras específicas
-            </label>
-            {removeSpecificWords && (
-              <input
-                type="text"
-                value={specificWords}
-                onChange={(e) => setSpecificWords(e.target.value)}
-                placeholder="Digite as palavras separadas por espaços ou vírgulas"
-                className="mt-2 p-2 bg-neutralDarkGray text-neutralLightGray rounded border border-neutralLightGray w-full"
-              />
-            )}
+        </div>
+
+        {/* Estatísticas do texto */}
+        <div className="grid grid-cols-3 gap-4">
+          <div className="card-modern text-center">
+            <div className="text-2xl font-bold text-blue-400">{value.length}</div>
+            <div className="text-sm text-slate-400">Caracteres</div>
           </div>
-          <div className="mt-6 flex space-x-4">
-          <button
-            onClick={pasteFromClipboard}
-            type="button"
-            aria-label="Colar texto do clipboard"
-            className="bg-primaryPurple text-analogousLavender px-4 py-2 rounded hover:bg-vibrantPink transition mt-4"
-          >
-            Colar
-          </button>
+          <div className="card-modern text-center">
+            <div className="text-2xl font-bold text-violet-400">{wordCount}</div>
+            <div className="text-sm text-slate-400">Palavras</div>
+          </div>
+          <div className="card-modern text-center">
+            <div className="text-2xl font-bold text-green-400">{value.split('\n').length}</div>
+            <div className="text-sm text-slate-400">Linhas</div>
+          </div>
+        </div>
+
+        {/* Opções de formatação */}
+        <div className="card-modern">
+          <h3 className="text-lg font-semibold text-blue-300 mb-4">Opções de Formatação</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-3">
+              <label className="flex items-center space-x-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={removeNumbers}
+                  onChange={(e) => setRemoveNumbers(e.target.checked)}
+                  className="w-4 h-4 text-purple-600 bg-neutral-700 border-purple-300 rounded focus:ring-purple-500"
+                />
+                <span className="text-gray-300">Remover números</span>
+              </label>
+
+              <label className="flex items-center space-x-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={removeLetters}
+                  onChange={(e) => setRemoveLetters(e.target.checked)}
+                  className="w-4 h-4 text-purple-600 bg-neutral-700 border-purple-300 rounded focus:ring-purple-500"
+                />
+                <span className="text-gray-300">Remover letras</span>
+              </label>
+
+              <label className="flex items-center space-x-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={removeDoubleSpaces}
+                  onChange={(e) => setRemoveDoubleSpaces(e.target.checked)}
+                  className="w-4 h-4 text-purple-600 bg-neutral-700 border-purple-300 rounded focus:ring-purple-500"
+                />
+                <span className="text-gray-300">Remover espaços duplos</span>
+              </label>
+            </div>
+
+            <div className="space-y-3">
+              <label className="flex items-center space-x-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={removeSpecific}
+                  onChange={(e) => setRemoveSpecific(e.target.checked)}
+                  className="w-4 h-4 text-purple-600 bg-neutral-700 border-purple-300 rounded focus:ring-purple-500"
+                />
+                <span className="text-gray-300">Remover caracteres específicos</span>
+              </label>
+              {removeSpecific && (
+                <input
+                  type="text"
+                  value={specificChars}
+                  onChange={(e) => setSpecificChars(e.target.value)}
+                  placeholder="Ex: !@#$%"
+                  className="ml-6 p-2 bg-neutral-700/50 text-white rounded border border-purple-500/30 focus:border-purple-400 focus:outline-none w-full"
+                />
+              )}
+
+              <label className="flex items-center space-x-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={removeSpecificWords}
+                  onChange={(e) => setRemoveSpecificWords(e.target.checked)}
+                  className="w-4 h-4 text-purple-600 bg-neutral-700 border-purple-300 rounded focus:ring-purple-500"
+                />
+                <span className="text-gray-300">Remover palavras específicas</span>
+              </label>
+              {removeSpecificWords && (
+                <input
+                  type="text"
+                  value={specificWords}
+                  onChange={(e) => setSpecificWords(e.target.value)}
+                  placeholder="Ex: palavra1, palavra2, palavra3"
+                  className="ml-6 p-2 bg-neutral-700/50 text-white rounded border border-purple-500/30 focus:border-purple-400 focus:outline-none w-full"
+                />
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Botões de ação */}
+        <div className="flex gap-3 flex-wrap">
           <button
             onClick={sanitizeText}
-            type="button"
-            aria-label="Formatar texto"
-            className="mt-12px bg-primaryPurple text-analogousLavender px-4 py-2 rounded hover:bg-vibrantPink transition mt-4"
+            className="btn-primary"
+            disabled={!value}
           >
-            Formatar
+            🔧 Formatar Texto
           </button>
-          </div>
-
-        {error && (
-          <div className="mt-4 p-4 bg-accentGold text-neutralLightGray rounded">
-            <p className="text-lg font-semibold">Error:</p>
-            <p className="text-xl">{error}</p>
-          </div>
-        )}
+          <button
+            onClick={copyToClipboard}
+            className="btn-secondary"
+            disabled={!value}
+          >
+            📋 Copiar Texto
+          </button>
+          <button
+            onClick={pasteFromClipboard}
+            className="btn-secondary"
+          >
+            📥 Colar Texto
+          </button>
+          <button
+            onClick={clearText}
+            className="btn-secondary"
+            disabled={!value}
+          >
+            🗑️ Limpar
+          </button>
+        </div>
       </div>
 
-      {message && (
-        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-neutralDarkGray text-analogousLavender px-4 py-2 rounded shadow-lg outline outline-vibrantPink">
-          {message}
-        </div>
+      {toastMessage && (
+        <Toast 
+          message={toastMessage} 
+          type="info"
+          onClose={closeToast}
+        />
       )}
-    </div>
+    </ToolPage>
   );
 };
 
-export default Caracteres_utils;
+export default CharacterUtils;

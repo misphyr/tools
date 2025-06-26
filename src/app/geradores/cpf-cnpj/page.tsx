@@ -1,84 +1,131 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import { cpfGenerator, cnpjGenerator } from '@/utils/utils';
-
-
+import ToolPage from '../../../components/ToolPage';
+import Toast from '../../../components/Toast';
 
 const CPF_CNPJ_Generator: React.FC = () => {
   const [value, setValue] = useState('');
   const [isFormatted, setIsFormatted] = useState(true);
-  const [message, setMessage] = useState<string | null>(null);
+  const [toast, setToast] = useState<{message: string, type: 'success' | 'error' | 'info' | 'warning'} | null>(null);
+
+  const showToast = (message: string, type: 'success' | 'error' | 'info' | 'warning') => {
+    setToast({ message, type });
+  };
 
   const handleGenerateCPF = () => {
-    setValue(cpfGenerator(isFormatted));
+    const newCpf = cpfGenerator(isFormatted);
+    setValue(newCpf);
+    showToast('CPF gerado com sucesso!', 'success');
   };
 
   const handleGenerateCNPJ = () => {
-    setValue(cnpjGenerator(isFormatted));
+    const newCnpj = cnpjGenerator(isFormatted);
+    setValue(newCnpj);
+    showToast('CNPJ gerado com sucesso!', 'success');
   };
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(value).then(() => {
-      showTemporaryMessage('Cpf/Cnpj Copiado!');
+      showToast('Documento copiado para área de transferência!', 'success');
+    }).catch(() => {
+      showToast('Erro ao copiar documento.', 'error');
     });
   };
 
-  const showTemporaryMessage = (msg: string) => {
-    setMessage(msg);
-    setTimeout(() => setMessage(null), 3000);
-  };
-
   return (
-      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-vibrantPink rounded">
-        <h1 className="text-2xl font-bold text-analogousLavender">Gerador CPF/CNPJ</h1>
-        <p className="mt-4 text-neutralLightGray">Gera um CPF/CNPJ aleatório</p>
+    <ToolPage
+      title="Gerador CPF/CNPJ"
+      description="Gere CPFs e CNPJs válidos para testes e desenvolvimento"
+      icon="📄"
+      category="geradores"
+    >
+      <div className="max-w-2xl mx-auto background-red">
+        <div className="card-modern">
+          <h2 className="text-xl font-semibold text-white mb-6 flex items-center space-x-2">
+            <span>🎲</span>
+            <span>Gerar Documento</span>
+          </h2>
 
-        <div className="mt-8 flex items-center space-x-4">
-          <input
-            type="text"
-            value={value}
-            readOnly
-            className="p-2 bg-neutralDarkGray text-neutralLightGray rounded border border-neutralLightGray flex-grow"
-          />
-          <button
-            onClick={copyToClipboard}
-            className="bg-primaryPurple text-neutralLightGray px-4 py-2 rounded hover:bg-vibrantPink transition"
-          >
-            Copiar
-          </button>
-        </div>
+          {/* Result Display */}
+          <div className="space-y-4">
+            <div className="relative grid grid-cols-1 gap-[1rem]">
+              <input
+                type="text"
+                value={value}
+                readOnly
+                placeholder="Documento gerado aparecerá aqui..."
+                className="input-modern pr-20 font-mono text-lg text-center"
+              />
+              {value && (
+                <button
+                  onClick={copyToClipboard}
+                  className="btn-info flex items-center justify-center space-x-2"
+                >  
+                <span>📋</span>
+                <span>Copiar</span>
+                </button>
+              )}
+            </div>
 
-        <div className="mt-4 flex items-center space-x-2">
-          <input
-            type="checkbox"
-            id="format-checkbox"
-            checked={isFormatted}
-            onChange={() => setIsFormatted(!isFormatted)}
-            className="text-primaryPurple"
-          />
-          <label htmlFor="format-checkbox" className="text-sm text-neutralLightGray">Formatado</label>
-        </div>
+            {/* Format Option */}
+            <div className="flex items-center mt-10 space-x-3">
+              <input
+                type="checkbox"
+                id="format-checkbox"
+                checked={isFormatted}
+                onChange={() => setIsFormatted(!isFormatted)}
+                className="checkbox-modern"
+              />
+              <label htmlFor="format-checkbox" className="text-slate-300 cursor-pointer">
+                Aplicar formatação (pontos e traços)
+              </label>
+            </div>
 
-        <div className="mt-6 flex space-x-4">
-          <button
-            onClick={handleGenerateCPF}
-            className="bg-primaryPurple text-neutralLightGray px-4 py-2 rounded hover:bg-vibrantPink transition"
-          >
-            CPF
-          </button>
-          <button
-            onClick={handleGenerateCNPJ}
-            className="bg-primaryPurple text-neutralLightGray px-4 py-2 rounded hover:bg-vibrantPink transition"
-          >
-            CNPJ
-          </button>
+            {/* Generate Buttons */}
+            <div className="grid grid-cols-2 gap-4">
+              <button
+                onClick={handleGenerateCPF}
+                className="btn-success flex items-center justify-center space-x-2"
+              >
+                <span>👤</span>
+                <span>Gerar CPF</span>
+              </button>
+              <button
+                onClick={handleGenerateCNPJ}
+                className="btn-success flex items-center justify-center space-x-2"
+              >
+                <span>🏢</span>
+                <span>Gerar CNPJ</span>
+              </button>
+            </div>
+
+            {/* Info */}
+            <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mt-6">
+              <div className="flex items-start space-x-3">
+                <span className="text-blue-400 text-xl">ℹ️</span>
+                <div>
+                  <h3 className="text-blue-300 font-semibold mb-2">Importante</h3>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    Os documentos gerados são válidos apenas para testes e desenvolvimento. 
+                    Não utilize em sistemas de produção ou para fins fraudulentos.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      {message && (
-        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-neutralDarkGray text-analogousLavender px-4 py-2 rounded shadow-lg outline outline-vibrantPink">
-          {message}
-        </div>
+      </div>
+
+      {/* Toast */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
       )}
-    </div>
+    </ToolPage>
   );
 };
 

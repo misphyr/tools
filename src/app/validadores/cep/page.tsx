@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from 'react';
+import ToolPage from '../../../components/ToolPage';
+import Toast from '../../../components/Toast';
 
 const formatCEP = (cep: string) => {
   // Remove non-numeric characters
@@ -19,12 +21,7 @@ const CEP_Validator: React.FC = () => {
   const [value, setValue] = useState('');
   const [address, setAddress] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
-  const [message, setMessage] = useState<string | null>(null);
-
-  const showTemporaryMessage = (msg: string) => {
-    setMessage(msg);
-    setTimeout(() => setMessage(null), 3000);
-  };
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const handleGenerateCEP = async () => {
     setError(null);
@@ -46,7 +43,7 @@ const CEP_Validator: React.FC = () => {
         }
       } catch (error) {
         console.error('Error fetching CEP data:', error);
-        showTemporaryMessage('Erro ao obter os dados');
+        setToastMessage('Erro ao obter os dados');
         break;
       }
     }
@@ -59,7 +56,7 @@ const CEP_Validator: React.FC = () => {
     const cleanedCEP = value.replace(/\D/g, '');
 
     if (cleanedCEP.length !== 8) {
-      showTemporaryMessage('Insira um CEP.');
+      setToastMessage('Insira um CEP.');
       return;
     }
 
@@ -72,7 +69,7 @@ const CEP_Validator: React.FC = () => {
       if (data.erro) {
         setCep(formattedCEP);
         setAddress(null);
-        showTemporaryMessage('CEP não encontrado.');
+        setToastMessage('CEP não encontrado.');
       } else {
         setCep(formattedCEP);
         setAddress(data);
@@ -81,7 +78,7 @@ const CEP_Validator: React.FC = () => {
     } catch (error) {
       console.error('Error fetching CEP data:', error);
       setAddress(null);
-      showTemporaryMessage('Erro ao obter dados. Não foi possível exibir.');
+      setToastMessage('Erro ao obter dados. Não foi possível exibir.');
     }
   };
 
@@ -89,9 +86,9 @@ const CEP_Validator: React.FC = () => {
     navigator.clipboard.readText().then(text => {
       const sanitizedText = text.replace(/[^0-9./-]/g, '');
       setValue(sanitizedText);
-      showTemporaryMessage('Texto Colado!');
+      setToastMessage('Texto Colado!');
     }).catch(err => {
-      showTemporaryMessage('Erro ao colar o texto.');
+      setToastMessage('Erro ao colar o texto.');
     });
   };
 
@@ -100,44 +97,50 @@ const CEP_Validator: React.FC = () => {
     handleValidateCEP();
   };
 
+  const closeToast = () => {
+    setToastMessage(null);
+  };
+
   return (
-      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-vibrantPink p-2">
-        <h1 className="text-2xl font-bold text-analogousLavender">Validador de CEP</h1>
-        <p className="mt-4 text-neutralLightGray">Verifica se o CEP existe</p>
+    <ToolPage 
+      title="Validador de CEP" 
+      description="Verifica se o CEP existe"
+      icon="📍"
+      category="validadores"
+    >
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex items-center space-x-4">
+          <input
+            type="text"
+            value={value}
+            placeholder="Digite o CEP"
+            onChange={(e) => setValue(e.target.value)}
+            className="flex-grow p-3 bg-neutral-800/50 text-white rounded-lg border border-purple-500/30 focus:border-purple-400 focus:outline-none transition-colors"
+          />
+          <button
+            onClick={pasteFromClipboard}
+            type="button"
+            className="btn-secondary"
+          >
+            Colar
+          </button>
+        </div>
+        <div className="flex space-x-4">
+          <button
+            onClick={handleValidateCEP}
+            type="submit"
+            className="btn-primary w-full"
+          >
+            Validar
+          </button>
+        </div>
+      </form>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="mt-8 flex items-center space-x-4">
-            <input
-              type="text"
-              value={value}
-              placeholder="Digite o CEP"
-              onChange={(e) => setValue(e.target.value)}
-              className="p-2 bg-neutralDarkGray text-neutralLightGray rounded border border-neutralLightGray flex-grow"
-            />
-            <button
-              onClick={pasteFromClipboard}
-              type="button"
-              className="bg-primaryPurple text-analogousLavender px-4 py-2 rounded hover:bg-vibrantPink transition"
-            >
-              Colar
-            </button>
-          </div>
-          <div className="mt-6 flex space-x-4">
-            <button
-              onClick={handleValidateCEP}
-              type="submit"
-              className="bg-primaryPurple w-full text-analogousLavender px-4 py-2 rounded hover:bg-vibrantPink transition"
-            >
-              Validar
-            </button>
-
-          </div>
-        </form>
       {cep && address && (
-        <div className="mt-4 p-4 bg-neutralDarkGray text-neutralLightGray rounded">
-          <p><h4 className="text-2xl text-vibrantPink">CEP Válido!</h4></p>
-          <div className="mt-2">
-            <p><strong>Cep:</strong> {cep}</p>
+        <div className="mt-6 p-4 bg-neutral-800/50 text-gray-200 rounded-lg border border-green-500/30">
+          <p><h4 className="text-xl text-green-400 font-semibold mb-2">CEP Válido!</h4></p>
+          <div className="space-y-1 text-sm">
+            <p><strong>CEP:</strong> {cep}</p>
             <p><strong>Endereço:</strong> {address.logradouro}</p>
             <p><strong>Bairro:</strong> {address.bairro}</p>
             <p><strong>Cidade:</strong> {address.localidade}</p>
@@ -147,20 +150,20 @@ const CEP_Validator: React.FC = () => {
       )}
 
       {error && (
-        <div className="mt-4 p-4 bg-accentGold text-neutralLightGray rounded">
-          <p className="text-lg font-semibold">Error:</p>
+        <div className="mt-4 p-4 bg-neutral-800/50 text-gray-200 rounded-lg border border-red-500/30">
+          <p className="text-lg font-semibold text-red-400">Erro:</p>
           <p className="text-xl">{error}</p>
         </div>
       )}
 
-      {
-    message && (
-      <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-neutralDarkGray text-analogousLavender px-4 py-2 rounded shadow-lg outline outline-vibrantPink">
-        {message}
-      </div>
-    )
-  }
-    </div>
+      {toastMessage && (
+        <Toast 
+          message={toastMessage} 
+          type="info"
+          onClose={closeToast}
+        />
+      )}
+    </ToolPage>
   );
 };
 
