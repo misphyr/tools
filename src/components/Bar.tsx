@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import MyComponent from '../components/iconFormatar'
 
 const Bar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,132 +44,172 @@ const Bar: React.FC = () => {
     setIsOpen(false); // Close the sidebar when navigating
   };
 
-  const avatarUrl = `https://cdn.discordapp.com/avatars/343957098184572958/a_bcbd511451310eaa15e351a590a54c1a.gif`;
+  const avatarUrl = `https://images-ext-1.discordapp.net/external/Xn2lWea_w0aioJbDMrEGMsbvJG_PIfL7W3vVsLDEFPE/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/343957098184572958/a_d70a5bdb058970076a26788c575730c4.gif`;
 
 
   const menuNavigation = (
-    <nav
-      className={`mt-16 transition-all duration-300 max-h-[85vh] overflow-y-auto ${
-        isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
-      }`}
-    >
-      <ul>
-        <li className="p-2">
-          <h2 className="text-lg font-semibold text-analogousLavender">Utilitários</h2>
-          <ul>
-            <li className="p-2 rounded">
+    <nav className="space-y-6">
+      <div className="space-y-4">
+        <div className="flex items-center space-x-2 mb-6">
+          <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-sm">🛠️</span>
+          </div>
+          <h1 className="text-xl font-bold text-white">Ferramentas</h1>
+        </div>
+        
+        {/* Utils Section */}
+        <div className="space-y-3 ">
+          <h2 className="text-sm font-semibold text-purple-300 uppercase tracking-wider flex items-center space-x-2">
+            <span>⚙️</span>
+            <span>Utilitários</span>
+          </h2>
+          <div className="space-y-2">
+            <button
+              onClick={() => navigateTo("/utils/caracteres")}
+              className="btn-secondary w-full flex items-center space-x-3 text-left hover:bg-blue-600/20 hover:border-blue-500/50"
+            >
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center text-white text-sm">
+                <MyComponent />
+              </div>
+              <span className="transition-colors duration-300">Formatador</span>
+              <svg className="w-4 h-4 ml-auto transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Generators Section */}
+        <div className="space-y-3">
+          <h2 className="text-sm font-semibold text-green-300 uppercase tracking-wider flex items-center space-x-2">
+            <span>🔄</span>
+            <span>Geradores</span>
+          </h2>
+          <div className="space-y-2">
+            {[
+              { path: "/geradores/cpf-cnpj", title: "CPF/CNPJ", icon: "📄" },
+              { path: "/geradores/cep", title: "CEP", icon: "📍" },
+              { path: "/geradores/cdas", title: "CDAS", icon: "📋" }
+            ].map((item) => (
               <button
-                onClick={() => navigateTo("/utils/caracteres")}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
+                key={item.path}
+                onClick={() => navigateTo(item.path)}
+                className="btn-secondary w-full flex items-center space-x-3 text-left hover:bg-green-600/20 hover:border-green-500/50"
               >
-                Formatador
+                <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center text-white text-sm">
+                  {item.icon}
+                </div>
+                <span className="transition-colors duration-300">{item.title}</span>
+                <svg className="w-4 h-4 ml-auto transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </button>
-            </li>
-          </ul>
-        </li>
-        <li className="p-2">
-          <h2 className="text-lg font-semibold text-analogousLavender">Geradores</h2>
-          <ul>
-            <li className="p-2 rounded">
+            ))}
+          </div>
+        </div>
+
+        {/* Validators Section */}
+        <div className="space-y-3">
+          <h2 className="text-sm font-semibold text-orange-300 uppercase tracking-wider flex items-center space-x-2">
+            <span>✅</span>
+            <span>Validadores</span>
+          </h2>
+          <div className="space-y-2">
+            {[
+              { path: "/validadores/cpf-cnpj", title: "CPF/CNPJ", icon: "🔍" },
+              { path: "/validadores/cep", title: "CEP", icon: "📍" }
+            ].map((item) => (
               <button
-                onClick={() => navigateTo("/geradores/cpf-cnpj")}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
+                key={item.path}
+                onClick={() => navigateTo(item.path)}
+                className="btn-secondary w-full flex items-center space-x-3 text-left hover:bg-orange-600/20 hover:border-orange-500/50"
               >
-                CPF/CNPJ
+                <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center text-white text-sm">
+                  {item.icon}
+                </div>
+                <span className="transition-colors duration-300">{item.title}</span>
+                <svg className="w-4 h-4 ml-auto transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </button>
-            </li>
-            <li className="p-2 rounded">
-              <button
-                onClick={() => navigateTo("/geradores/cep")}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
-              >
-                CEP
-              </button>
-            </li>
-            <li className="p-2 rounded">
-              <button
-                onClick={() => navigateTo("/geradores/cdas")}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
-              >
-                CDAS
-              </button>
-            </li>
-          </ul>
-        </li>
-        <li className="p-2">
-          <h2 className="text-lg font-semibold text-analogousLavender">Validadores</h2>
-          <ul>
-            <li className="p-2 rounded">
-              <button
-                onClick={() => navigateTo("/validadores/cpf-cnpj")}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
-              >
-                CPF/CNPJ
-              </button>
-            </li>
-            <li className="p-2 rounded">
-              <button
-                onClick={() => navigateTo("/validadores/cep")}
-                className="w-full px-4 py-2 rounded bg-primaryPurple text-neutralLightGray hover:bg-vibrantPink transition"
-              >
-                CEP
-              </button>
-            </li>
-          </ul>
-        </li>
-      </ul>
+            ))}
+          </div>
+        </div>
+      </div>
     </nav>
   );
   
   return (
     <aside className="flex flex-col w-full">
       {/* Header */}
-      <div className="sticky z-40 w-full bg-primaryPurple shadow text-neutralLightGray p-2 flex justify-between items-center transition-all duration-300 z-50">
-        <div className="text-xl font-bold ml-4 flex items-center">
-          <button
-            onClick={toggleSidebar}
-            className="p-2 text-neutralLightGray bg-primaryPurple rounded focus:outline-none hover:bg-vibrantPink"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className={`w-8 h-8 ${isOpen ? "rotate-90" : ""} transition duration-300`}
+      <div className="sticky top-0 z-50 w-full bg-slate-900/95 backdrop-blur-md shadow-lg border-b border-slate-700/50">
+        <div className="px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={toggleSidebar}
+              className="btn-secondary p-2 group"
             >
-              <path
-                fillRule="evenodd"
-                d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
-                clipRule="evenodd"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className={`w-6 h-6 ${isOpen ? "rotate-90" : ""} transition-all duration-300 group-hover:scale-110`}
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+            <div
+              onClick={() => navigateTo("/")}
+              className="cursor-pointer flex items-center space-x-2 group"
+            >
+              <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">T</span>
+              </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-pink-300 transition-all duration-300">
+                Toolbox
+              </span>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-4">
+            <span className="text-slate-300 font-medium hidden sm:block">Misphyr</span>
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
+              <div
+                className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-slate-600 group-hover:border-indigo-400 transition-all duration-300"
+                style={{
+                  backgroundImage: `url(${avatarUrl})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
               />
-            </svg>
-          </button>
-          <div
-            onClick={() => navigateTo("/")}
-            className="cursor-pointer ml-4 underline decoration-neutralDarkGray text-analogousLavender"
-          >
-            Toolbox
+            </div>
           </div>
         </div>
-        <div className="flex items-center mr-4">
-          <div className="text-xl font-bold mr-2 underline decoration-neutralDarkGray text-analogousLavender">Misphyr</div>
-          <div
-            className="w-12 h-12 rounded-full overflow-hidden border-2 border-neutralDarkGray"
-            style={{
-              backgroundImage: `url(${avatarUrl})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-        </div>
       </div>
+      
       {/* Sidebar */}
       <div
-        className={`absolute h-screen w-64 sm:w-80 lg:w-96 bg-neutralDarkGray shadow transition-all duration-150 transform border-4 border-transparent border-r-primaryPurple ${
+        className={`fixed top-0 left-0 h-full w-80 bg-slate-900/95 backdrop-blur-md shadow-2xl border-r border-slate-700/50 transform transition-all duration-300 ease-in-out z-40 ${
           isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
-        } z-40`}
+        }`}
       >
-        {menuNavigation}
+        <div className="p-6 pt-40 overflow-y-auto h-full">
+          {menuNavigation}
+        </div>
       </div>
+      
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 transition-opacity duration-300"
+          onClick={toggleSidebar}
+        />
+      )}
     </aside>
   );
   

@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from 'react';
+import ToolPage from '../../../components/ToolPage';
+import Toast from '../../../components/Toast';
 
 const isValidCPF = (cpf: string) => {
   const cleanedCPF = cpf.replace(/\D/g, '');
@@ -63,26 +65,21 @@ const isValidCNPJ = (cnpj: string) => {
 
 const CPF_CNPJ_Validator: React.FC = () => {
   const [value, setValue] = useState('');
-  const [message, setMessage] = useState<string | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const pasteFromClipboard = () => {
     navigator.clipboard.readText().then(text => {
       const sanitizedText = text.replace(/[^0-9./-]/g, '');
       setValue(sanitizedText);
-      showTemporaryMessage('Texto Colado!');
+      setToastMessage('Texto Colado!');
     }).catch(err => {
-      showTemporaryMessage('Erro ao colar o texto.');
+      setToastMessage('Erro ao colar o texto.');
     });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     ValidarCpfCnpj();
-  };
-
-  const showTemporaryMessage = (msg: string) => {
-    setMessage(msg);
-    setTimeout(() => setMessage(null), 5000);
   };
 
   const ValidarCpfCnpj = () => {
@@ -96,51 +93,59 @@ const CPF_CNPJ_Validator: React.FC = () => {
     }
 
     if (isValid) {
-      showTemporaryMessage(`O CPF/CNPJ é válido!`);
+      setToastMessage(`O CPF/CNPJ é válido!`);
     } else {
-      showTemporaryMessage('CPF/CNPJ inválido.');
+      setToastMessage('CPF/CNPJ inválido.');
     }
   };
 
+  const closeToast = () => {
+    setToastMessage(null);
+  };
+
   return (
-      <div className="bg-neutralDarkGray p-8 rounded-lg shadow-lg w-full max-w-lg outline outline-vibrantPink p-2">
-        <h1 className="text-2xl font-bold text-analogousLavender">Validador CPF/CNPJ</h1>
-        <p className="mt-4 text-neutralLightGray">Verifica se o CPF ou CNPJ é válido</p>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="mt-8 flex items-center space-x-4">
-            <input
-              type="text"
-              value={value}
-              placeholder="Digite o CPF/CNPJ"
-              onChange={(e) => setValue(e.target.value)}
-              className="p-2 bg-neutralDarkGray text-neutralLightGray rounded border border-neutralLightGray flex-grow"
-            />
-            <button
-              onClick={pasteFromClipboard}
-              type="button"
-              className="bg-primaryPurple text-analogousLavender px-4 py-2 rounded hover:bg-vibrantPink transition"
-            >
-              Colar
-            </button>
-          </div>
-          <div className="mt-6 flex space-x-4">
-            <button
-              onClick={ValidarCpfCnpj}
-              type="submit"
-              className="bg-primaryPurple w-full text-analogousLavender px-4 py-2 rounded hover:bg-vibrantPink transition"
-            >
-              Validar
-            </button>
-
-          </div>
-        </form>
-      {message && (
-        <div className="fixed bottom-4 left-1/2 transform animate-bounce duration-5000 -translate-x-1/2 bg-neutralDarkGray text-analogousLavender px-4 py-2 rounded shadow-lg outline outline-vibrantPink">
-          {message}
+    <ToolPage 
+      title="Validador CPF/CNPJ" 
+      description="Verifica se o CPF ou CNPJ é válido"
+      icon="🔍"
+      category="validadores"
+    >
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex items-center space-x-4">
+          <input
+            type="text"
+            value={value}
+            placeholder="Digite o CPF/CNPJ"
+            onChange={(e) => setValue(e.target.value)}
+            className="flex-grow p-3 bg-neutral-800/50 text-white rounded-lg border border-purple-500/30 focus:border-purple-400 focus:outline-none transition-colors"
+          />
+          <button
+            onClick={pasteFromClipboard}
+            type="button"
+            className="btn-secondary"
+          >
+            Colar
+          </button>
         </div>
+        <div className="flex space-x-4">
+          <button
+            onClick={ValidarCpfCnpj}
+            type="submit"
+            className="btn-primary w-full"
+          >
+            Validar
+          </button>
+        </div>
+      </form>
+      
+      {toastMessage && (
+        <Toast 
+          message={toastMessage} 
+          type="info"
+          onClose={closeToast}
+        />
       )}
-    </div>
+    </ToolPage>
   );
 };
 

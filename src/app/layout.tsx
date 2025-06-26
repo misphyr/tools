@@ -16,13 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="h-screen ">
-        <div className="flex flex-col gap-1 h-full w-full overflow-hidden">
+    <html lang="pt-BR">
+      <body className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div className="flex flex-col h-screen w-full">
           <Bar />
-          <main className="flex justify-center items-center h-full w-full z-20 overflow-y-auto overflow-visible">
-            {children}
-            </main>
+          <main className="flex-1 flex justify-center items-start p-6 overflow-y-auto">
+            <div className="w-full max-w-7xl">
+              {children}
+            </div>
+          </main>
         </div>
       </body>
     </html>
