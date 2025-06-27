@@ -3,8 +3,11 @@ import React from 'react';
 import Link from "next/link";
 
 const sections = {
-  Utils: [
+  Utilitários: [
     { title: "Formatar Texto", path: "/utils/caracteres" },
+    { title: "Indentador de Arquivo", path: "/utils/indentador" },
+    { title: "Gerador Lorem Ipsum", path: "/utils/lorem" },
+    { title: "Codificador Base64", path: "/utils/base64" },
   ],
   Geradores: [
     { title: "Gerar CPF/CNPJ", path: "/geradores/cpf-cnpj" },
