@@ -7,7 +7,7 @@ const CharacterUtils: React.FC = () => {
   const [value, setValue] = useState('');
   const [wordCount, setWordCount] = useState(0);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  
+
   // Opções de formatação
   const [removeNumbers, setRemoveNumbers] = useState(false);
   const [removeLetters, setRemoveLetters] = useState(false);
@@ -30,7 +30,7 @@ const CharacterUtils: React.FC = () => {
       sanitizedText = sanitizedText.replace(/[a-zA-ZáéíóúãâêîôûàèìòùçÁÉÍÓÚÃÂÊÎÔÛÀÈÌÒÙÇ]/g, '');
     }
     if (removeDoubleSpaces) {
-      sanitizedText = sanitizedText.replace(/\s+/g, ' ').trim();
+      sanitizedText = sanitizedText.replace(/[ \t]+/g, ' ').trim();
     }
     if (removeSpecific && specificChars) {
       const regex = new RegExp(`[${specificChars.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}]`, 'g');
@@ -84,8 +84,8 @@ const CharacterUtils: React.FC = () => {
   };
 
   return (
-    <ToolPage 
-      title="Formatador de Texto" 
+    <ToolPage
+      title="Formatador de Texto"
       description="Ferramenta completa para formatação e sanitização de texto"
       icon="�"
       category="utils"
@@ -120,7 +120,7 @@ const CharacterUtils: React.FC = () => {
         {/* Opções de formatação */}
         <div className="card-modern">
           <h3 className="text-lg font-semibold text-blue-300 mb-4">Opções de Formatação</h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-3">
               <label className="flex items-center space-x-2 cursor-pointer">
@@ -128,7 +128,7 @@ const CharacterUtils: React.FC = () => {
                   type="checkbox"
                   checked={removeNumbers}
                   onChange={(e) => setRemoveNumbers(e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-neutral-700 border-purple-300 rounded focus:ring-purple-500"
+                  className="checkbox-modern"
                 />
                 <span className="text-gray-300">Remover números</span>
               </label>
@@ -138,7 +138,7 @@ const CharacterUtils: React.FC = () => {
                   type="checkbox"
                   checked={removeLetters}
                   onChange={(e) => setRemoveLetters(e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-neutral-700 border-purple-300 rounded focus:ring-purple-500"
+                  className="checkbox-modern"
                 />
                 <span className="text-gray-300">Remover letras</span>
               </label>
@@ -148,7 +148,7 @@ const CharacterUtils: React.FC = () => {
                   type="checkbox"
                   checked={removeDoubleSpaces}
                   onChange={(e) => setRemoveDoubleSpaces(e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-neutral-700 border-purple-300 rounded focus:ring-purple-500"
+                  className="checkbox-modern"
                 />
                 <span className="text-gray-300">Remover espaços duplos</span>
               </label>
@@ -160,7 +160,7 @@ const CharacterUtils: React.FC = () => {
                   type="checkbox"
                   checked={removeSpecific}
                   onChange={(e) => setRemoveSpecific(e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-neutral-700 border-purple-300 rounded focus:ring-purple-500"
+                  className="checkbox-modern"
                 />
                 <span className="text-gray-300">Remover caracteres específicos</span>
               </label>
@@ -179,7 +179,7 @@ const CharacterUtils: React.FC = () => {
                   type="checkbox"
                   checked={removeSpecificWords}
                   onChange={(e) => setRemoveSpecificWords(e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-neutral-700 border-purple-300 rounded focus:ring-purple-500"
+                  className="checkbox-modern"
                 />
                 <span className="text-gray-300">Remover palavras específicas</span>
               </label>
@@ -229,8 +229,8 @@ const CharacterUtils: React.FC = () => {
       </div>
 
       {toastMessage && (
-        <Toast 
-          message={toastMessage} 
+        <Toast
+          message={toastMessage}
           type="info"
           onClose={closeToast}
         />
