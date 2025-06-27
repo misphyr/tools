@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import MyComponent from '../components/iconFormatar'
+import path from 'path';
 
 const Bar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,40 +51,41 @@ const Bar: React.FC = () => {
   const menuNavigation = (
     <nav className="space-y-6">
       <div className="space-y-4">
-        <div className="flex items-center space-x-2 mb-6">
-          <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">🛠️</span>
-          </div>
-          <h1 className="text-xl font-bold text-white">Ferramentas</h1>
-        </div>
-        
+
         {/* Utils Section */}
         <div className="space-y-3 ">
           <h2 className="text-sm font-semibold text-purple-300 uppercase tracking-wider flex items-center space-x-2">
-            <span>⚙️</span>
+            <div className="h-1 bg-gradient-to-r from-violet-600 to-purple-300 rounded-full flex-1"></div>
             <span>Utilitários</span>
+            <div className="h-1 bg-gradient-to-r from-purple-300 to-violet-600 rounded-full flex-1"></div>
           </h2>
           <div className="space-y-2">
-            <button
-              onClick={() => navigateTo("/utils/caracteres")}
-              className="btn-secondary w-full flex items-center space-x-3 text-left hover:bg-blue-600/20 hover:border-blue-500/50"
-            >
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center text-white text-sm">
-                <MyComponent />
-              </div>
-              <span className="transition-colors duration-300">Formatador</span>
-              <svg className="w-4 h-4 ml-auto transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+            {[
+              { path: "/utils/caracteres", title: "Formatar Texto", icon: "📝" },
+              { path: "/utils/indentador", title: "Indentador de Arquivo", icon: "📂" },
+              { path: "/utils/lorem", title: "Gerador Lorem Ipsum", icon: "📄" },
+              { path: "/utils/base64", title: "Codificador Base64", icon: "🔐" }
+            ].map((item) => (
+              <button
+                key={item.path}
+                onClick={() => navigateTo(item.path)}
+                className="btn-secondary w-full btn-left-align space-x-3 text-left hover:bg-fuchsia-600/20 hover:border-fuchsia-500/50"
+              >
+                <div className="w-8 h-8 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-lg flex items-center justify-center text-white text-sm">
+                  {item.icon}
+                </div>
+                <span className="transition-colors duration-300">{item.title}</span>
+              </button>
+            ))}
           </div>
         </div>
 
         {/* Generators Section */}
         <div className="space-y-3">
           <h2 className="text-sm font-semibold text-green-300 uppercase tracking-wider flex items-center space-x-2">
-            <span>🔄</span>
+            <div className="h-1 bg-gradient-to-r from-violet-600 to-green-300 rounded-full flex-1"></div>
             <span>Geradores</span>
+            <div className="h-1 bg-gradient-to-r from-green-300 to-violet-600 rounded-full flex-1"></div>
           </h2>
           <div className="space-y-2">
             {[
@@ -94,15 +96,12 @@ const Bar: React.FC = () => {
               <button
                 key={item.path}
                 onClick={() => navigateTo(item.path)}
-                className="btn-secondary w-full flex items-center space-x-3 text-left hover:bg-green-600/20 hover:border-green-500/50"
+                className="btn-secondary w-full btn-left-align space-x-3 text-left hover:bg-green-600/20 hover:border-green-500/50"
               >
-                <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center text-white text-sm">
+                <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center text-white text-sm">
                   {item.icon}
                 </div>
                 <span className="transition-colors duration-300">{item.title}</span>
-                <svg className="w-4 h-4 ml-auto transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
               </button>
             ))}
           </div>
@@ -111,8 +110,9 @@ const Bar: React.FC = () => {
         {/* Validators Section */}
         <div className="space-y-3">
           <h2 className="text-sm font-semibold text-orange-300 uppercase tracking-wider flex items-center space-x-2">
-            <span>✅</span>
+            <div className="h-1 bg-gradient-to-r from-violet-600 to-orange-300 rounded-full flex-1"></div>
             <span>Validadores</span>
+            <div className="h-1 bg-gradient-to-r from-orange-300 to-violet-600 rounded-full flex-1"></div>
           </h2>
           <div className="space-y-2">
             {[
@@ -122,15 +122,12 @@ const Bar: React.FC = () => {
               <button
                 key={item.path}
                 onClick={() => navigateTo(item.path)}
-                className="btn-secondary w-full flex items-center space-x-3 text-left hover:bg-orange-600/20 hover:border-orange-500/50"
+                className="btn-secondary w-full flex btn-left-align space-x-3 text-left hover:bg-orange-600/20 hover:border-orange-500/50"
               >
-                <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center text-white text-sm">
+                <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center text-white text-sm">
                   {item.icon}
                 </div>
                 <span className="transition-colors duration-300">{item.title}</span>
-                <svg className="w-4 h-4 ml-auto transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
               </button>
             ))}
           </div>
@@ -138,7 +135,7 @@ const Bar: React.FC = () => {
       </div>
     </nav>
   );
-  
+
   return (
     <aside className="flex flex-col w-full">
       {/* Header */}
@@ -174,7 +171,7 @@ const Bar: React.FC = () => {
               </span>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <span className="text-slate-300 font-medium hidden sm:block">Misphyr</span>
             <div className="relative group">
@@ -191,18 +188,17 @@ const Bar: React.FC = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-80 bg-slate-900/95 backdrop-blur-md shadow-2xl border-r border-slate-700/50 transform transition-all duration-300 ease-in-out z-40 ${
-          isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
-        }`}
+        className={`fixed top-0 left-0 h-full w-80 bg-slate-900/95 backdrop-blur-md shadow-2xl border-r border-slate-700/50 transform transition-all duration-300 ease-in-out z-40 ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
+          }`}
       >
-        <div className="p-6 pt-40 overflow-y-auto h-full">
+        <div className="p-6 pt-28 overflow-y-auto h-full">
           {menuNavigation}
         </div>
       </div>
-      
+
       {/* Overlay */}
       {isOpen && (
         <div
@@ -212,7 +208,7 @@ const Bar: React.FC = () => {
       )}
     </aside>
   );
-  
+
 };
 
 export default Bar;

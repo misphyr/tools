@@ -48,6 +48,8 @@
 
 * {
   box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
 }
 
 html {
@@ -339,6 +341,15 @@ textarea {
   box-shadow: 
     0 2px 8px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.btn-left-align {
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+.btn-right-align {
+  justify-content: flex-end !important;
+  text-align: right !important;
 }
 
 .btn-secondary::before {
