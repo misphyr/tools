@@ -226,7 +226,7 @@ const FormatterPage: React.FC = () => {
     <ToolPage
       title="Identador de Texto"
       description="Idente JSON, XML, CSS e JavaScript com facilidade. "
-      icon="📄"
+      icon="📂"
       category="utils"
     >
       <div className="space-y-6">

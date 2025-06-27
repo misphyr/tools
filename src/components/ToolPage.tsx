@@ -44,7 +44,7 @@ const ToolPage: React.FC<ToolPageProps> = ({
   const config = categoryConfig[category];
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-4">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">

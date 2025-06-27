@@ -27,13 +27,15 @@ const HomePage: React.FC = () => {
         <div className="inline-flex items-center px-4 py-2 bg-blue-500/20 rounded-full border border-blue-500/40 backdrop-blur-sm">
           <span className="text-blue-300 text-sm font-medium">✨ Ferramentas Desenvolvidas por Misphyr</span>
         </div>
-        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-blue-200 to-blue-300 bg-clip-text text-transparent">
-          Toolbox
-        </h1>
-        <p className="text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
-          Uma coleção de ferramentas úteis para seu dia a dia. <br/>
-          Simples, rápida e eficiente.
-        </p>
+          <div className="w-full flex justify-center mt-10">
+            <h1 className="text-center text-5xl md:text-6xl px-6 py-4 font-bold bg-gradient-to-br from-purple-400 to-cyan-300 bg-clip-text text-transparent">
+              Toolbox
+            </h1>
+          </div>
+          <p className="mt-2 text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
+            Uma coleção de ferramentas úteis para seu dia a dia. <br />
+            Simples, rápida e eficiente.
+          </p>
       </div>
 
       {/* Tools Grid */}

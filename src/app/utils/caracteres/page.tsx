@@ -87,7 +87,7 @@ const CharacterUtils: React.FC = () => {
     <ToolPage
       title="Formatador de Texto"
       description="Ferramenta completa para formatação e sanitização de texto"
-      icon="�"
+      icon="📝"
       category="utils"
     >
       <div className="space-y-6">
