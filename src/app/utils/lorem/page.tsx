@@ -196,7 +196,7 @@ const LoremPage: React.FC = () => {
                 className="checkbox-modern"
               />
               <span className="text-sm text-slate-300">
-                Começar com "Lorem ipsum dolor sit amet"
+                Começar com &quot;Lorem ipsum dolor sit amet&quot;
               </span>
             </label>
           </div>
