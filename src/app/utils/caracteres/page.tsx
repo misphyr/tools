@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import ToolPage from '../../../components/ToolPage';
 import Toast from '../../../components/Toast';
+import StatCard from '../../../components/StatCard';
 
 const CharacterUtils: React.FC = () => {
   const [value, setValue] = useState('');
@@ -87,7 +88,6 @@ const CharacterUtils: React.FC = () => {
     <ToolPage
       title="Formatador de Texto"
       description="Ferramenta completa para formatação e sanitização de texto"
-      icon="📝"
       category="utils"
     >
       <div className="space-y-6">
@@ -102,24 +102,15 @@ const CharacterUtils: React.FC = () => {
         </div>
 
         {/* Estatísticas do texto */}
-        <div className="grid grid-cols-3 gap-4">
-          <div className="card-modern text-center">
-            <div className="text-2xl font-bold text-blue-400">{value.length}</div>
-            <div className="text-sm text-slate-400">Caracteres</div>
-          </div>
-          <div className="card-modern text-center">
-            <div className="text-2xl font-bold text-violet-400">{wordCount}</div>
-            <div className="text-sm text-slate-400">Palavras</div>
-          </div>
-          <div className="card-modern text-center">
-            <div className="text-2xl font-bold text-green-400">{value.split('\n').length}</div>
-            <div className="text-sm text-slate-400">Linhas</div>
-          </div>
+        <div className="grid grid-cols-3 gap-3">
+          <StatCard value={value.length} label="Caracteres" />
+          <StatCard value={wordCount} label="Palavras" />
+          <StatCard value={value.split('\n').length} label="Linhas" />
         </div>
 
         {/* Opções de formatação */}
         <div className="card-modern">
-          <h3 className="text-lg font-semibold text-blue-300 mb-4">Opções de Formatação</h3>
+          <h3 className="text-lg font-semibold text-accent mb-4">Opções de Formatação</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-3">
@@ -130,7 +121,7 @@ const CharacterUtils: React.FC = () => {
                   onChange={(e) => setRemoveNumbers(e.target.checked)}
                   className="checkbox-modern"
                 />
-                <span className="text-gray-300">Remover números</span>
+                <span className="text-fg">Remover números</span>
               </label>
 
               <label className="flex items-center space-x-2 cursor-pointer">
@@ -140,7 +131,7 @@ const CharacterUtils: React.FC = () => {
                   onChange={(e) => setRemoveLetters(e.target.checked)}
                   className="checkbox-modern"
                 />
-                <span className="text-gray-300">Remover letras</span>
+                <span className="text-fg">Remover letras</span>
               </label>
 
               <label className="flex items-center space-x-2 cursor-pointer">
@@ -150,7 +141,7 @@ const CharacterUtils: React.FC = () => {
                   onChange={(e) => setRemoveDoubleSpaces(e.target.checked)}
                   className="checkbox-modern"
                 />
-                <span className="text-gray-300">Remover espaços duplos</span>
+                <span className="text-fg">Remover espaços duplos</span>
               </label>
             </div>
 
@@ -162,7 +153,7 @@ const CharacterUtils: React.FC = () => {
                   onChange={(e) => setRemoveSpecific(e.target.checked)}
                   className="checkbox-modern"
                 />
-                <span className="text-gray-300">Remover caracteres específicos</span>
+                <span className="text-fg">Remover caracteres específicos</span>
               </label>
               {removeSpecific && (
                 <input
@@ -170,7 +161,7 @@ const CharacterUtils: React.FC = () => {
                   value={specificChars}
                   onChange={(e) => setSpecificChars(e.target.value)}
                   placeholder="Ex: !@#$%"
-                  className="ml-6 p-2 bg-neutral-700/50 text-white rounded border border-purple-500/30 focus:border-purple-400 focus:outline-none w-full"
+                  className="input-modern !py-2 ml-6 !w-[calc(100%-1.5rem)]"
                 />
               )}
 
@@ -181,7 +172,7 @@ const CharacterUtils: React.FC = () => {
                   onChange={(e) => setRemoveSpecificWords(e.target.checked)}
                   className="checkbox-modern"
                 />
-                <span className="text-gray-300">Remover palavras específicas</span>
+                <span className="text-fg">Remover palavras específicas</span>
               </label>
               {removeSpecificWords && (
                 <input
@@ -189,7 +180,7 @@ const CharacterUtils: React.FC = () => {
                   value={specificWords}
                   onChange={(e) => setSpecificWords(e.target.value)}
                   placeholder="Ex: palavra1, palavra2, palavra3"
-                  className="ml-6 p-2 bg-neutral-700/50 text-white rounded border border-purple-500/30 focus:border-purple-400 focus:outline-none w-full"
+                  className="input-modern !py-2 ml-6 !w-[calc(100%-1.5rem)]"
                 />
               )}
             </div>
@@ -203,27 +194,27 @@ const CharacterUtils: React.FC = () => {
             className="btn-primary"
             disabled={!value}
           >
-            🔧 Formatar Texto
+            Formatar Texto
           </button>
           <button
             onClick={copyToClipboard}
             className="btn-secondary"
             disabled={!value}
           >
-            📋 Copiar Texto
+            Copiar Texto
           </button>
           <button
             onClick={pasteFromClipboard}
             className="btn-secondary"
           >
-            📥 Colar Texto
+            Colar Texto
           </button>
           <button
             onClick={clearText}
             className="btn-secondary"
             disabled={!value}
           >
-            🗑️ Limpar
+            Limpar
           </button>
         </div>
       </div>

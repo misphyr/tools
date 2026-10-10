@@ -112,13 +112,12 @@ const Base64Page: React.FC = () => {
     <ToolPage
       title="Codificador Base64"
       description="Codifique e decodifique texto e arquivos em Base64 de forma rápida e segura"
-      icon="🔐"
       category="utils"
     >
       <div className="space-y-6">
         {/* Seletor de Modo */}
         <div className="card-modern">
-          <h3 className="text-lg font-semibold text-white mb-4">Modo de Operação</h3>
+          <h3 className="text-lg font-semibold text-fg mb-4">Modo de Operação</h3>
           <div className="flex space-x-4">
             <label className="flex items-center space-x-2 cursor-pointer">
               <input
@@ -128,7 +127,7 @@ const Base64Page: React.FC = () => {
                 onChange={() => setMode('encode')}
                 className="checkbox-modern"
               />
-              <span className="text-slate-300">
+              <span className="text-fg">
                 <svg className="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -143,7 +142,7 @@ const Base64Page: React.FC = () => {
                 onChange={() => setMode('decode')}
                 className="checkbox-modern"
               />
-              <span className="text-slate-300">
+              <span className="text-fg">
                 <svg className="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                 </svg>
@@ -155,10 +154,10 @@ const Base64Page: React.FC = () => {
 
         {/* Upload de Arquivo */}   
         <div className="card-modern">
-          <h3 className="text-lg font-semibold text-white mb-4">
+          <h3 className="text-lg font-semibold text-fg mb-4">
             {mode === 'encode' ? 'Upload de Arquivo para Codificar' : 'Upload de Arquivo Base64'}
           </h3>
-          <div className="border-2 border-dashed border-slate-600 rounded-lg p-6 text-center hover:border-violet-500 transition-colors">
+          <div className="border-2 border-dashed border-line-strong rounded-lg p-6 text-center hover:border-accent transition-colors">
             <input
               type="file"
               onChange={handleFileUpload}
@@ -167,13 +166,13 @@ const Base64Page: React.FC = () => {
               accept={mode === 'decode' ? '.txt' : '*'}
             />
             <label htmlFor="file-upload" className="cursor-pointer">
-              <svg className="w-12 h-12 mx-auto text-slate-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-12 h-12 mx-auto text-muted mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
-              <p className="text-slate-300 mb-2">
+              <p className="text-fg mb-2">
                 {mode === 'encode' ? 'Clique para selecionar um arquivo' : 'Clique para selecionar um arquivo .txt com Base64'}
               </p>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-muted">
                 {mode === 'encode' ? 'Qualquer tipo de arquivo' : 'Apenas arquivos de texto (.txt)'}
               </p>
             </label>
@@ -182,7 +181,7 @@ const Base64Page: React.FC = () => {
 
         {/* Entrada de Texto */}
         <div className="card-modern">
-          <h3 className="text-lg font-semibold text-white mb-4">
+          <h3 className="text-lg font-semibold text-fg mb-4">
             {mode === 'encode' ? 'Texto para Codificar' : 'Texto Base64 para Decodificar'}
           </h3>
           <textarea
@@ -192,7 +191,7 @@ const Base64Page: React.FC = () => {
             className="input-modern h-32 resize-none font-mono text-sm"
           />
           {mode === 'decode' && inputText && !isValidBase64(inputText.trim()) && (
-            <p className="text-yellow-400 text-sm mt-2 flex items-center">
+            <p className="text-warning text-sm mt-2 flex items-center">
               <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.96-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
@@ -246,12 +245,12 @@ const Base64Page: React.FC = () => {
 
         {/* Mensagem de Erro */}
         {error && (
-          <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4">
+          <div className="notice notice-error">
             <div className="flex items-center space-x-2">
-              <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span className="text-red-300 font-medium">{error}</span>
+              <span className="text-danger font-medium">{error}</span>
             </div>
           </div>
         )}
@@ -259,15 +258,15 @@ const Base64Page: React.FC = () => {
         {/* Resultado */}
         {outputText && !error && (
           <div className="card-modern">
-            <h3 className="text-lg font-semibold text-white mb-4">
+            <h3 className="text-lg font-semibold text-fg mb-4">
               {mode === 'encode' ? 'Texto Codificado (Base64)' : 'Texto Decodificado'}
             </h3>
-            <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-4 max-h-96 overflow-auto">
-              <pre className="text-slate-200 font-mono text-sm whitespace-pre-wrap break-all">
+            <div className="panel-output max-h-96 overflow-auto">
+              <pre className="text-fg font-mono text-sm whitespace-pre-wrap break-all">
                 {outputText}
               </pre>
             </div>
-            <div className="mt-4 text-sm text-slate-400">
+            <div className="mt-4 text-sm text-muted">
               <p>
                 <strong>Estatísticas:</strong> {outputText.length} caracteres
                 {mode === 'encode' && (

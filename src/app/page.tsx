@@ -1,96 +1,70 @@
 // src/app/page.tsx
 import React from 'react';
 import Link from "next/link";
-
-const sections = {
-  Utilitários: [
-    { title: "Formatar Texto", path: "/utils/caracteres" },
-    { title: "Indentador de Arquivo", path: "/utils/indentador" },
-    { title: "Gerador Lorem Ipsum", path: "/utils/lorem" },
-    { title: "Codificador Base64", path: "/utils/base64" },
-  ],
-  Geradores: [
-    { title: "Gerar CPF/CNPJ", path: "/geradores/cpf-cnpj" },
-    { title: "Gerar CEP", path: "/geradores/cep" },
-    { title: "Gerar CDAS", path: "/geradores/cdas" },
-  ],
-  Validadores: [
-    { title: "Validar CPF/CNPJ", path: "/validadores/cpf-cnpj" },
-    { title: "Validar CEP", path: "/validadores/cep" },
-  ],
-};
+import { toolSections, toolCount } from '../data/tools';
 
 const HomePage: React.FC = () => {
   return (
-    <div className="space-y-8 py-8">        {/* Hero Section */}
-      <div className="text-center space-y-4">
-        <div className="inline-flex items-center px-4 py-2 bg-blue-500/20 rounded-full border border-blue-500/40 backdrop-blur-sm">
-          <span className="text-blue-300 text-sm font-medium">✨ Ferramentas Desenvolvidas por Misphyr</span>
+    <div className="pb-8">
+      {/* Hero Section */}
+      <section className="pt-16 pb-12 sm:pt-24 sm:pb-16 animate-fade-in">
+        <p className="font-mono text-accent text-sm">~/misphyr.tools</p>
+        <h1 className="mt-3 text-4xl sm:text-6xl font-bold tracking-tight leading-[1.05]">
+          Ferramentas pequenas<br />
+          para o <span className="text-accent">dia a dia</span>.
+        </h1>
+        <p className="mt-5 max-w-xl text-muted text-lg">
+          Formatadores, geradores e validadores pensados para dev e QA.
+          Tudo roda no navegador, sem cadastro.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-2">
+          {toolSections.map((section) => (
+            <a key={section.category} href={`#${section.category}`} className="tag hover:bg-accent/20 transition-colors">
+              {section.label}
+              <span className="text-muted">{section.tools.length}</span>
+            </a>
+          ))}
+          <span className="tag !bg-transparent !text-muted">{toolCount} ferramentas</span>
         </div>
-          <div className="w-full flex justify-center mt-10">
-            <h1 className="text-center text-5xl md:text-6xl px-6 py-4 font-bold bg-gradient-to-br from-purple-400 to-cyan-300 bg-clip-text text-transparent">
-              Toolbox
-            </h1>
-          </div>
-          <p className="mt-2 text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
-            Uma coleção de ferramentas úteis para seu dia a dia. <br />
-            Simples, rápida e eficiente.
-          </p>
-      </div>
+      </section>
 
       {/* Tools Grid */}
-      <div className="space-y-12">
-        {Object.entries(sections).map(([label, items]) => (
-          <div key={label} className="space-y-6">
-            <div className="flex items-center space-x-4">
-              <div className="h-1 bg-gradient-to-r from-violet-600 to-cyan-400 rounded-full flex-1"></div>
-              <h2 className="text-3xl font-bold text-white px-4">{label}</h2>
-              <div className="h-1 bg-gradient-to-r from-cyan-400 to-violet-600 rounded-full flex-1"></div>
-            </div>
+      <div className="space-y-14">
+        {toolSections.map((section, sectionIndex) => (
+          <section key={section.category} id={section.category} className="scroll-mt-24">
+            <h2 className="text-2xl font-semibold tracking-tight mb-5">
+              <span className="font-mono text-base text-accent mr-2">0{sectionIndex + 1}.</span>
+              {section.label}
+            </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {items.map((item, index) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {section.tools.map((tool) => (
                 <Link
-                  key={item.path}
-                  href={item.path}
-                  className="group relative"
+                  key={tool.path}
+                  href={tool.path}
+                  className="group card-modern flex items-start gap-4 !p-4 transition-colors hover:bg-surface-hover hover:border-accent"
                 >
-                  <div className="absolute -inset-0.5 background-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-60 transition duration-300"></div>
-                  <div className="relative card-modern group-hover:transform group-hover:scale-[1.1]">
-                    <div className="flex items-center space-x-4 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-10% via-40% to-100% from-cyan-600 via-violet-600 to-blue-400 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                        {index + 1}
-                      </div>
-                      <h3 className="text-xl font-semibold text-white transition-colors duration-300 mb-2">
-                        {item.title}
-                      </h3>
-                    </div>
-                    <p className="text-slate-300 text-sm">
-                      Clique para acessar esta ferramenta
-                    </p>
-                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <svg className="w-5 h-5 text-violet-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </div>
-                  </div>
+                  <span className="flex-1 min-w-0">
+                    <span className="flex items-center justify-between gap-2">
+                      <strong className="font-semibold">{tool.title}</strong>
+                      <span className="text-accent opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" aria-hidden>→</span>
+                    </span>
+                    <span className="block text-sm text-muted mt-0.5">{tool.description}</span>
+                  </span>
                 </Link>
               ))}
             </div>
-          </div>
+          </section>
         ))}
       </div>
 
       {/* Footer Section */}
-      <div className="text-center pt-16 pb-8">
-        <div className="inline-flex items-center space-x-2 text-slate-400">
-          <span>Feito com</span>
-          <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-          </svg>
-          <span>por Misphyr</span>
-        </div>
-      </div>
+      <footer className="mt-20 pt-8 border-t border-line flex flex-wrap justify-between gap-2 text-sm text-muted">
+        <span>
+          Feito por <a href="https://misphyr.com" className="text-fg hover:text-accent transition-colors">Misphyr</a>
+        </span>
+        <span className="font-mono">misphyr.tools</span>
+      </footer>
     </div>
   );
 };

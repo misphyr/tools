@@ -226,16 +226,15 @@ const FormatterPage: React.FC = () => {
     <ToolPage
       title="Identador de Texto"
       description="Idente JSON, XML, CSS e JavaScript com facilidade. "
-      icon="📂"
       category="utils"
     >
       <div className="space-y-6">
         {/* Configurações */}
         <div className="card-modern">
-          <h3 className="text-lg font-semibold text-white mb-4">Configurações</h3>
+          <h3 className="text-lg font-semibold text-fg mb-4">Configurações</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
+              <label className="block text-sm font-medium text-fg mb-2">
                 Tamanho da Indentação
               </label>
               <input
@@ -256,7 +255,7 @@ const FormatterPage: React.FC = () => {
                   onChange={() => setUseSpaces(true)}
                   className="checkbox-modern"
                 />
-                <span className="text-sm text-slate-300">Espaços</span>
+                <span className="text-sm text-fg">Espaços</span>
               </label>
               <label className="flex items-center space-x-2 cursor-pointer">
                 <input
@@ -266,7 +265,7 @@ const FormatterPage: React.FC = () => {
                   onChange={() => setUseSpaces(false)}
                   className="checkbox-modern"
                 />
-                <span className="text-sm text-slate-300">Tabs</span>
+                <span className="text-sm text-fg">Tabs</span>
               </label>
             </div>
           </div>
@@ -274,7 +273,7 @@ const FormatterPage: React.FC = () => {
 
         {/* Entrada */}
         <div className="card-modern">
-          <h3 className="text-lg font-semibold text-white mb-4">Código para Indentar</h3>
+          <h3 className="text-lg font-semibold text-fg mb-4">Código para Indentar</h3>
           <textarea
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
@@ -329,8 +328,8 @@ const FormatterPage: React.FC = () => {
         {/* Saída */}
         {outputText && (
           <div className="card-modern">
-            <h3 className="text-lg font-semibold text-white mb-4">Código Indentado</h3>
-            <pre className="bg-slate-900/50 border border-slate-600 rounded-lg p-4 overflow-auto max-h-96 text-sm font-mono text-slate-200">
+            <h3 className="text-lg font-semibold text-fg mb-4">Código Indentado</h3>
+            <pre className="panel-output overflow-auto max-h-96 text-sm font-mono text-fg">
               {outputText}
             </pre>
           </div>

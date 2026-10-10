@@ -37,13 +37,11 @@ const CPF_CNPJ_Generator: React.FC = () => {
     <ToolPage
       title="Gerador CPF/CNPJ"
       description="Gere CPFs e CNPJs válidos para testes e desenvolvimento"
-      icon="📄"
       category="geradores"
     >
-      <div className="max-w-2xl mx-auto background-red">
+      <div className="max-w-2xl mx-auto">
         <div className="card-modern">
-          <h2 className="text-xl font-semibold text-white mb-6 flex items-center space-x-2">
-            <span>🎲</span>
+          <h2 className="text-xl font-semibold text-fg mb-6 flex items-center space-x-2">
             <span>Gerar Documento</span>
           </h2>
 
@@ -62,7 +60,6 @@ const CPF_CNPJ_Generator: React.FC = () => {
                   onClick={copyToClipboard}
                   className="btn-info flex items-center justify-center space-x-2"
                 >  
-                <span>📋</span>
                 <span>Copiar</span>
                 </button>
               )}
@@ -77,7 +74,7 @@ const CPF_CNPJ_Generator: React.FC = () => {
                 onChange={() => setIsFormatted(!isFormatted)}
                 className="checkbox-modern"
               />
-              <label htmlFor="format-checkbox" className="text-slate-300 cursor-pointer">
+              <label htmlFor="format-checkbox" className="text-fg cursor-pointer">
                 Aplicar formatação (pontos e traços)
               </label>
             </div>
@@ -88,25 +85,22 @@ const CPF_CNPJ_Generator: React.FC = () => {
                 onClick={handleGenerateCPF}
                 className="btn-success flex items-center justify-center space-x-2"
               >
-                <span>👤</span>
                 <span>Gerar CPF</span>
               </button>
               <button
                 onClick={handleGenerateCNPJ}
                 className="btn-success flex items-center justify-center space-x-2"
               >
-                <span>🏢</span>
                 <span>Gerar CNPJ</span>
               </button>
             </div>
 
             {/* Info */}
-            <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mt-6">
+            <div className="notice notice-info mt-6">
               <div className="flex items-start space-x-3">
-                <span className="text-blue-400 text-xl">ℹ️</span>
                 <div>
-                  <h3 className="text-blue-300 font-semibold mb-2">Importante</h3>
-                  <p className="text-slate-300 text-sm leading-relaxed">
+                  <h3 className="text-accent font-semibold mb-2">Importante</h3>
+                  <p className="text-fg text-sm leading-relaxed">
                     Os documentos gerados são válidos apenas para testes e desenvolvimento. 
                     Não utilize em sistemas de produção ou para fins fraudulentos.
                   </p>

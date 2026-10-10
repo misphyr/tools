@@ -23,13 +23,12 @@ const JsonGenerator: React.FC = () => {
     <ToolPage 
       title="Gerador de CDA" 
       description="Gera uma CDA com os parâmetros indicados"
-      icon="📄"
       category="geradores"
     >
       <div className="space-y-6">
-        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-          <p className="text-yellow-400 font-medium">🚧 Em Construção...</p>
-          <p className="text-gray-400 text-sm mt-1">Esta ferramenta está sendo aprimorada.</p>
+        <div className="notice notice-warning">
+          <p className="text-warning font-medium">Em Construção...</p>
+          <p className="text-muted text-sm mt-1">Esta ferramenta está sendo aprimorada.</p>
         </div>
 
         <div className="flex justify-center">
@@ -37,7 +36,7 @@ const JsonGenerator: React.FC = () => {
             onClick={handleDownload}
             className="btn-primary px-8 py-3"
           >
-            📥 Baixar CDA
+            Baixar CDA
           </button>
         </div>
       </div>

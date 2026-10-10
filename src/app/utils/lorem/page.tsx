@@ -123,13 +123,12 @@ const LoremPage: React.FC = () => {
     <ToolPage
       title="Gerador Lorem Ipsum"
       description="Gere texto Lorem Ipsum personalizado para seus projetos e layouts"
-      icon="📝"
       category="utils"
     >
       <div className="space-y-6">
         {/* Botões Rápidos */}
         <div className="card-modern">
-          <h3 className="text-lg font-semibold text-white mb-4">Geradores Rápidos</h3>
+          <h3 className="text-lg font-semibold text-fg mb-4">Geradores Rápidos</h3>
           <div className="flex flex-wrap gap-3">
             <button
               onClick={() => generateQuickText('short')}
@@ -157,10 +156,10 @@ const LoremPage: React.FC = () => {
 
         {/* Configurações Personalizadas */}
         <div className="card-modern">
-          <h3 className="text-lg font-semibold text-white mb-4">Configurações Personalizadas</h3>
+          <h3 className="text-lg font-semibold text-fg mb-4">Configurações Personalizadas</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
+              <label className="block text-sm font-medium text-fg mb-2">
                 Número de Parágrafos
               </label>
               <input
@@ -173,7 +172,7 @@ const LoremPage: React.FC = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
+              <label className="block text-sm font-medium text-fg mb-2">
                 Palavras por Parágrafo
               </label>
               <input
@@ -195,7 +194,7 @@ const LoremPage: React.FC = () => {
                 onChange={(e) => setStartWithLorem(e.target.checked)}
                 className="checkbox-modern"
               />
-              <span className="text-sm text-slate-300">
+              <span className="text-sm text-fg">
                 Começar com &quot;Lorem ipsum dolor sit amet&quot;
               </span>
             </label>
@@ -237,13 +236,13 @@ const LoremPage: React.FC = () => {
         {/* Texto Gerado */}
         {generatedText && (
           <div className="card-modern">
-            <h3 className="text-lg font-semibold text-white mb-4">Texto Gerado</h3>
-            <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-4 max-h-96 overflow-auto">
-              <div className="text-slate-200 leading-relaxed whitespace-pre-wrap">
+            <h3 className="text-lg font-semibold text-fg mb-4">Texto Gerado</h3>
+            <div className="panel-output max-h-96 overflow-auto">
+              <div className="text-fg leading-relaxed whitespace-pre-wrap">
                 {generatedText}
               </div>
             </div>
-            <div className="mt-4 text-sm text-slate-400">
+            <div className="mt-4 text-sm text-muted">
               <p>
                 <strong>Estatísticas:</strong> {paragraphCount} parágrafo(s) • 
                 {generatedText.split(' ').length} palavras • 

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import ToolPage from '../../../components/ToolPage';
 import Toast from '../../../components/Toast';
+import ResultBanner from '../../../components/ResultBanner';
 
 const formatCEP = (cep: string) => {
   // Remove non-numeric characters
@@ -21,6 +22,7 @@ const CEP_Validator: React.FC = () => {
   const [value, setValue] = useState('');
   const [address, setAddress] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [notFound, setNotFound] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const handleGenerateCEP = async () => {
@@ -52,6 +54,7 @@ const CEP_Validator: React.FC = () => {
   const handleValidateCEP = async () => {
     setError(null);
     setAddress(null);
+    setNotFound(false);
 
     const cleanedCEP = value.replace(/\D/g, '');
 
@@ -69,7 +72,7 @@ const CEP_Validator: React.FC = () => {
       if (data.erro) {
         setCep(formattedCEP);
         setAddress(null);
-        setToastMessage('CEP não encontrado.');
+        setNotFound(true);
       } else {
         setCep(formattedCEP);
         setAddress(data);
@@ -105,7 +108,6 @@ const CEP_Validator: React.FC = () => {
     <ToolPage 
       title="Validador de CEP" 
       description="Verifica se o CEP existe"
-      icon="📍"
       category="validadores"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -115,7 +117,7 @@ const CEP_Validator: React.FC = () => {
             value={value}
             placeholder="Digite o CEP"
             onChange={(e) => setValue(e.target.value)}
-            className="flex-grow p-3 bg-neutral-800/50 text-white rounded-lg border border-purple-500/30 focus:border-purple-400 focus:outline-none transition-colors"
+            className="flex-grow input-modern !w-auto"
           />
           <button
             onClick={pasteFromClipboard}
@@ -127,7 +129,6 @@ const CEP_Validator: React.FC = () => {
         </div>
         <div className="flex space-x-4">
           <button
-            onClick={handleValidateCEP}
             type="submit"
             className="btn-primary w-full"
           >
@@ -137,21 +138,27 @@ const CEP_Validator: React.FC = () => {
       </form>
 
       {cep && address && (
-        <div className="mt-6 p-4 bg-neutral-800/50 text-gray-200 rounded-lg border border-green-500/30">
-          <p><h4 className="text-xl text-green-400 font-semibold mb-2">CEP Válido!</h4></p>
-          <div className="space-y-1 text-sm">
-            <p><strong>CEP:</strong> {cep}</p>
-            <p><strong>Endereço:</strong> {address.logradouro}</p>
-            <p><strong>Bairro:</strong> {address.bairro}</p>
-            <p><strong>Cidade:</strong> {address.localidade}</p>
-            <p><strong>Estado:</strong> {address.uf}</p>
-          </div>
-        </div>
+        <ResultBanner isValid title="CEP válido">
+          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-sm">
+            <dt className="text-muted">Endereço</dt>
+            <dd>{address.logradouro || '—'}</dd>
+            <dt className="text-muted">Bairro</dt>
+            <dd>{address.bairro || '—'}</dd>
+            <dt className="text-muted">Cidade</dt>
+            <dd>{address.localidade}</dd>
+            <dt className="text-muted">Estado</dt>
+            <dd>{address.uf}</dd>
+          </dl>
+        </ResultBanner>
+      )}
+
+      {cep && notFound && (
+        <ResultBanner isValid={false} title="CEP não encontrado" />
       )}
 
       {error && (
-        <div className="mt-4 p-4 bg-neutral-800/50 text-gray-200 rounded-lg border border-red-500/30">
-          <p className="text-lg font-semibold text-red-400">Erro:</p>
+        <div className="mt-4 notice notice-error">
+          <p className="text-lg font-semibold text-danger">Erro:</p>
           <p className="text-xl">{error}</p>
         </div>
       )}

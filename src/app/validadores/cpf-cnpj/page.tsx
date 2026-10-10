@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import ToolPage from '../../../components/ToolPage';
 import Toast from '../../../components/Toast';
+import ResultBanner from '../../../components/ResultBanner';
 
 const isValidCPF = (cpf: string) => {
   const cleanedCPF = cpf.replace(/\D/g, '');
@@ -66,11 +67,13 @@ const isValidCNPJ = (cnpj: string) => {
 const CPF_CNPJ_Validator: React.FC = () => {
   const [value, setValue] = useState('');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [result, setResult] = useState<{ isValid: boolean; kind: string } | null>(null);
 
   const pasteFromClipboard = () => {
     navigator.clipboard.readText().then(text => {
       const sanitizedText = text.replace(/[^0-9./-]/g, '');
       setValue(sanitizedText);
+      setResult(null);
       setToastMessage('Texto Colado!');
     }).catch(err => {
       setToastMessage('Erro ao colar o texto.');
@@ -85,18 +88,23 @@ const CPF_CNPJ_Validator: React.FC = () => {
   const ValidarCpfCnpj = () => {
     const cleanedValue = value.replace(/\D/g, '');
     let isValid = false;
+    let kind = 'CPF/CNPJ';
+
+    if (!cleanedValue) {
+      setResult(null);
+      setToastMessage('Insira um CPF ou CNPJ.');
+      return;
+    }
 
     if (cleanedValue.length === 11) {
+      kind = 'CPF';
       isValid = isValidCPF(value);
     } else if (cleanedValue.length === 14) {
+      kind = 'CNPJ';
       isValid = isValidCNPJ(value);
     }
 
-    if (isValid) {
-      setToastMessage(`O CPF/CNPJ é válido!`);
-    } else {
-      setToastMessage('CPF/CNPJ inválido.');
-    }
+    setResult({ isValid, kind });
   };
 
   const closeToast = () => {
@@ -107,7 +115,6 @@ const CPF_CNPJ_Validator: React.FC = () => {
     <ToolPage 
       title="Validador CPF/CNPJ" 
       description="Verifica se o CPF ou CNPJ é válido"
-      icon="🔍"
       category="validadores"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -116,8 +123,11 @@ const CPF_CNPJ_Validator: React.FC = () => {
             type="text"
             value={value}
             placeholder="Digite o CPF/CNPJ"
-            onChange={(e) => setValue(e.target.value)}
-            className="flex-grow p-3 bg-neutral-800/50 text-white rounded-lg border border-purple-500/30 focus:border-purple-400 focus:outline-none transition-colors"
+            onChange={(e) => {
+              setValue(e.target.value);
+              setResult(null);
+            }}
+            className="flex-grow input-modern !w-auto"
           />
           <button
             onClick={pasteFromClipboard}
@@ -129,7 +139,6 @@ const CPF_CNPJ_Validator: React.FC = () => {
         </div>
         <div className="flex space-x-4">
           <button
-            onClick={ValidarCpfCnpj}
             type="submit"
             className="btn-primary w-full"
           >
@@ -137,7 +146,14 @@ const CPF_CNPJ_Validator: React.FC = () => {
           </button>
         </div>
       </form>
-      
+
+      {result && (
+        <ResultBanner
+          isValid={result.isValid}
+          title={result.isValid ? `${result.kind} válido` : `${result.kind} inválido`}
+        />
+      )}
+
       {toastMessage && (
         <Toast 
           message={toastMessage} 
