@@ -1,4 +1,4 @@
-export type ToolCategory = 'utils' | 'geradores' | 'validadores';
+export type ToolCategory = 'utils' | 'geradores' | 'validadores' | 'aleatorios';
 
 export interface Tool {
   title: string;
@@ -55,6 +55,14 @@ export const toolSections: ToolSection[] = [
       { title: 'Cronômetro e Timer', shortTitle: 'Cronômetro', description: 'Voltas e contagem regressiva com alarme', path: '/utils/cronometro' },
       { title: 'Conversor de Unidades', shortTitle: 'Unidades', description: 'Peso, medida, temperatura, dados e mais', path: '/utils/unidades' },
       { title: 'Extrator de Texto (OCR)', shortTitle: 'OCR', description: 'Lê o texto de imagens e prints', path: '/utils/ocr' },
+    ],
+  },
+  {
+    category: 'aleatorios',
+    label: 'Aleatórios',
+    singular: 'Aleatório',
+    tools: [
+      { title: 'Placar', shortTitle: 'Placar', description: 'Contador de pontos por lado, com tela cheia', path: '/aleatorios/placar' },
     ],
   },
 ];
