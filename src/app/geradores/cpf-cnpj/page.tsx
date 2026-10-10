@@ -45,28 +45,9 @@ const CPF_CNPJ_Generator: React.FC = () => {
             <span>Gerar Documento</span>
           </h2>
 
-          {/* Result Display */}
-          <div className="space-y-4">
-            <div className="relative grid grid-cols-1 gap-[1rem]">
-              <input
-                type="text"
-                value={value}
-                readOnly
-                placeholder="Documento gerado aparecerá aqui..."
-                className="input-modern pr-20 font-mono text-lg text-center"
-              />
-              {value && (
-                <button
-                  onClick={copyToClipboard}
-                  className="btn-info flex items-center justify-center space-x-2"
-                >  
-                <span>Copiar</span>
-                </button>
-              )}
-            </div>
-
+          <div className="space-y-5">
             {/* Format Option */}
-            <div className="flex items-center mt-10 space-x-3">
+            <div className="flex items-center gap-3">
               <input
                 type="checkbox"
                 id="format-checkbox"
@@ -80,23 +61,33 @@ const CPF_CNPJ_Generator: React.FC = () => {
             </div>
 
             {/* Generate Buttons */}
-            <div className="grid grid-cols-2 gap-4">
-              <button
-                onClick={handleGenerateCPF}
-                className="btn-success flex items-center justify-center space-x-2"
-              >
-                <span>Gerar CPF</span>
+            <div className="grid grid-cols-2 gap-3">
+              <button onClick={handleGenerateCPF} className="btn-primary">
+                Gerar CPF
               </button>
-              <button
-                onClick={handleGenerateCNPJ}
-                className="btn-success flex items-center justify-center space-x-2"
-              >
-                <span>Gerar CNPJ</span>
+              <button onClick={handleGenerateCNPJ} className="btn-primary">
+                Gerar CNPJ
               </button>
             </div>
 
+            {/* Result Display */}
+            <div className="pt-5 border-t border-line grid grid-cols-1 gap-3">
+              <input
+                type="text"
+                value={value}
+                readOnly
+                placeholder="Documento gerado aparecerá aqui..."
+                className="input-modern font-mono text-lg text-center"
+              />
+              {value && (
+                <button onClick={copyToClipboard} className="btn-info">
+                  Copiar
+                </button>
+              )}
+            </div>
+
             {/* Info */}
-            <div className="notice notice-info mt-6">
+            <div className="notice notice-info">
               <div className="flex items-start space-x-3">
                 <div>
                   <h3 className="text-accent font-semibold mb-2">Importante</h3>

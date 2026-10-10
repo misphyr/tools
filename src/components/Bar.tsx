@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { toolSections } from '../data/tools';
+import { defaultDiscordAvatar, useDiscordAvatar } from '../utils/useDiscordAvatar';
+
+const discordUserId = '343957098184572958';
 
 type Theme = 'dark' | 'light';
 
@@ -50,7 +53,7 @@ const Bar: React.FC = () => {
     setTheme(nextTheme);
   };
 
-  const avatarUrl = `https://images-ext-1.discordapp.net/external/Xn2lWea_w0aioJbDMrEGMsbvJG_PIfL7W3vVsLDEFPE/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/343957098184572958/a_d70a5bdb058970076a26788c575730c4.gif`;
+  const avatarUrl = useDiscordAvatar(discordUserId);
 
   const menuNavigation = (
     <nav className="space-y-7">
@@ -135,13 +138,14 @@ const Bar: React.FC = () => {
               title="misphyr.com"
             >
               <span className="text-muted text-sm font-medium hidden sm:block group-hover:text-fg transition-colors">Misphyr</span>
-              <span
-                className="block w-9 h-9 rounded-full border border-line-strong group-hover:border-accent transition-colors"
-                style={{
-                  backgroundImage: `url(${avatarUrl})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={avatarUrl}
+                alt="Avatar do Misphyr"
+                width={36}
+                height={36}
+                onError={(e) => { e.currentTarget.src = defaultDiscordAvatar(discordUserId); }}
+                className="block w-9 h-9 rounded-full object-cover border border-line-strong group-hover:border-accent transition-colors"
               />
             </a>
           </div>
