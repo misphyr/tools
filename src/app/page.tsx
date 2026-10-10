@@ -8,7 +8,7 @@ const HomePage: React.FC = () => {
     <div className="pb-8">
       {/* Hero Section */}
       <section className="pt-16 pb-12 sm:pt-24 sm:pb-16 animate-fade-in">
-        <p className="font-mono text-accent text-sm">~/misphyr.tools</p>
+        <p className="font-mono text-accent text-sm">~/tools.misphyr</p>
         <h1 className="mt-3 text-4xl sm:text-6xl font-bold tracking-tight leading-[1.05]">
           Ferramentas pequenas<br />
           para o <span className="text-accent">dia a dia</span>.
