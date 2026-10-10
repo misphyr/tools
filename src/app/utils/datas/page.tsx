@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import ToolPage from '@/components/ToolPage';
 import StatCard from '@/components/StatCard';
 import SegmentedControl from '@/components/SegmentedControl';
+import DateInput from '@/components/DateInput';
 
 const msPerDay = 86_400_000;
 
@@ -133,15 +134,15 @@ const DateDifferencePage: React.FC = () => {
               { label: 'Data inicial', value: startValue, set: setStartValue },
               { label: 'Data final', value: endValue, set: setEndValue },
             ].map((field) => (
-              <label key={field.label} className="block space-y-2">
+              <div key={field.label} className="space-y-2">
                 <span className="flex items-center justify-between">
                   <span className="eyebrow">{field.label}</span>
                   <button type="button" onClick={() => setToday(field.set)} className="text-xs text-muted hover:text-accent transition-colors">
                     hoje
                   </button>
                 </span>
-                <input type="date" value={field.value} onChange={(e) => field.set(e.target.value)} className="input-modern" />
-              </label>
+                <DateInput value={field.value} onChange={field.set} ariaLabel={field.label} />
+              </div>
             ))}
           </div>
           <label className="flex items-center gap-2 cursor-pointer">
@@ -183,10 +184,10 @@ const DateDifferencePage: React.FC = () => {
         <div className="card-modern space-y-4">
           <h3 className="text-lg font-semibold text-fg">Somar ou subtrair de uma data</h3>
           <div className="flex flex-wrap items-end gap-3">
-            <label className="space-y-2">
+            <div className="space-y-2">
               <span className="eyebrow block">Data</span>
-              <input type="date" value={baseValue} onChange={(e) => setBaseValue(e.target.value)} className="input-modern !w-auto" />
-            </label>
+              <DateInput value={baseValue} onChange={setBaseValue} wrapperClassName="w-48" ariaLabel="Data" />
+            </div>
             <SegmentedControl
               ariaLabel="Operação"
               options={[{ value: 'add', label: '+ Somar' }, { value: 'subtract', label: '− Subtrair' }]}

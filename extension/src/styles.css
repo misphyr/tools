@@ -1,0 +1,19 @@
+/* Fontes empacotadas: a extensão funciona offline e sem CSS remoto */
+@import '@fontsource/space-grotesk/400.css';
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/600.css';
+@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/jetbrains-mono/700.css';
+@import '../../src/app/globals.css';
+
+.popup-body {
+  width: 360px;
+  min-height: 0;
+}
+
+/* Com uma ferramenta aberta o popup fica mais largo (o limite do navegador é 800x600) */
+.popup-body.popup-tool {
+  width: 480px;
+}

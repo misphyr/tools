@@ -110,7 +110,7 @@ const Bar: React.FC = () => {
               </svg>
             </button>
             <Link href="/" className="font-mono font-bold text-accent text-lg tracking-tight hover:text-accent-strong transition-colors">
-              misphyr<span className="text-muted">.tools</span>
+              tools<span className="text-muted">.misphyr</span>
             </Link>
           </div>
 

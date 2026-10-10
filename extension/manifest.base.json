@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "misphyr.tools",
+  "description": "Geradores e validadores do dia a dia de dev e QA: CPF/CNPJ, CEP, UUID, strings de teste, Base64 e mais.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "misphyr.tools",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}

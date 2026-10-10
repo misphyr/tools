@@ -1,8 +1,11 @@
 "use client";
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, createContext, useContext } from 'react';
 import Link from 'next/link';
 import { toolSections, ToolCategory } from '../data/tools';
+
+// Versão enxuta (sem navegação e rodapé) para espaços pequenos, como o popup da extensão
+export const ToolPageCompactContext = createContext(false);
 
 interface ToolPageProps {
   title: string;
@@ -18,6 +21,21 @@ const ToolPage: React.FC<ToolPageProps> = ({
   children
 }) => {
   const section = toolSections.find((item) => item.category === category);
+  const compact = useContext(ToolPageCompactContext);
+
+  if (compact) {
+    return (
+      <div className="py-4 space-y-4">
+        <div className="space-y-1">
+          <h1 className="text-xl font-bold tracking-tight">{title}</h1>
+          <p className="text-sm text-muted">{description}</p>
+        </div>
+        <div className="animate-fade-in">
+          {children}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="py-10 sm:py-14">

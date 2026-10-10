@@ -1,0 +1,22 @@
+{
+  "name": "misphyr-tools-extension",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --watch --mode development",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build && npm run zip",
+    "zip": "web-ext build -s dist/chrome -a dist -n chrome.zip -o && web-ext build -s dist/firefox -a dist -n firefox.zip -o",
+    "lint": "web-ext lint -s dist/firefox"
+  },
+  "devDependencies": {
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "sharp": "^0.35.5",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.4",
+    "web-ext": "^10.7.0"
+  }
+}
